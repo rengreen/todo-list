@@ -15,6 +15,8 @@
 *.iws
 *.iml
 *.ipr
+out/
+.idea_modules/
 
 ### NetBeans ###
 /nbproject/private/
@@ -23,3 +25,11 @@
 /nbdist/
 /.nb-gradle/
 /build/
+
+### Java ###
+*.class
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+hs_err_pid*
