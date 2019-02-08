@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.repository.TaskRepository;
 
-import java.math.BigDecimal;
-
 @Component
 public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -30,10 +28,10 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         //1
         task = new Task();
         task.setName("first meeting");
-        task.setDescription("Setup first meetings(s) with client");
+        task.setDescription("Setup first meetings with client");
         task.setStartDate("1-03-2019");
         task.setEndDate("2-03-2019");
-        task.setCompleted(false);
+        task.setCompleted(true);
         task.setUser("Mark");
         productRepository.save(task);
         logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
@@ -41,10 +39,10 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         //2
         task = new Task();
         task.setName("briefing document");
-        task.setDescription("SDefine and collect briefing document from client");
+        task.setDescription("Define and collect briefing document from client");
         task.setStartDate("2-03-2019");
         task.setEndDate("3-03-2019");
-        task.setCompleted(false);
+        task.setCompleted(true);
         task.setUser("Ann");
         productRepository.save(task);
         logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
@@ -52,10 +50,10 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         //3
         task = new Task();
         task.setName("project questionnaire");
-        task.setDescription("Define and send project questionnaire to the client and wait for the client’s response. Iterate on doubts you have until everybody is in agreement. Finalize project questionnaire from client");
+        task.setDescription("Define and send project questionnaire to the client and wait for the client’s response. Finalize project questionnaire from client");
         task.setStartDate("3-03-2019");
         task.setEndDate("4-03-2019");
-        task.setCompleted(false);
+        task.setCompleted(true);
         task.setUser("Ralf");
         productRepository.save(task);
         logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
@@ -66,7 +64,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setDescription("Research client’s company to understand their brand, the way they communicate, their demographics, target audience");
         task.setStartDate("4-03-2019");
         task.setEndDate("5-03-2019");
-        task.setCompleted(false);
+        task.setCompleted(true);
         task.setUser("Kate");
         productRepository.save(task);
         logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
@@ -74,11 +72,66 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         //5
         task = new Task();
         task.setName("client’s industry research");
-        task.setDescription("Research client’s industry to find ways of communicating specifically to the industry, strengths and weaknesses, trends and other industry specifics");
+        task.setDescription("Research client’s industry to find ways of communicating specifically to the industry, strengths and weaknesses, and trends");
         task.setStartDate("5-03-2019");
         task.setEndDate("6-03-2019");
         task.setCompleted(false);
         task.setUser("Tom");
+        productRepository.save(task);
+        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+
+        //6
+        task = new Task();
+        task.setName("valuation of development effort");
+        task.setDescription("Get quotation for development effort for project");
+        task.setStartDate("6-03-2019");
+        task.setEndDate("7-03-2019");
+        task.setCompleted(false);
+        task.setUser("Mark");
+        productRepository.save(task);
+        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+
+        //7
+        task = new Task();
+        task.setName("valuation of designers work");
+        task.setDescription("Get quotation for design, estimate design work with designers");
+        task.setStartDate("7-03-2019");
+        task.setEndDate("8-03-2019");
+        task.setCompleted(false);
+        task.setUser("Mark");
+        productRepository.save(task);
+        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+
+        //8
+        task = new Task();
+        task.setName("valuation of copywriters work");
+        task.setDescription("Get quotation for copy/content, estimate work with copywriters");
+        task.setStartDate("8-03-2019");
+        task.setEndDate("9-03-2019");
+        task.setCompleted(false);
+        task.setUser("Ann");
+        productRepository.save(task);
+        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+
+        //9
+        task = new Task();
+        task.setName("valuation of photos/video");
+        task.setDescription("Get quotation for photography/video production or estimate effort involved");
+        task.setStartDate("9-03-2019");
+        task.setEndDate("10-03-2019");
+        task.setCompleted(false);
+        task.setUser("Ann");
+        productRepository.save(task);
+        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+
+        //10
+        task = new Task();
+        task.setName("valuation of hosting/domain");
+        task.setDescription("Get quotation for Hosting/Domain, particularly if specialized hosting is involved");
+        task.setStartDate("10-03-2019");
+        task.setEndDate("11-03-2019");
+        task.setCompleted(false);
+        task.setUser("Ann");
         productRepository.save(task);
         logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
     }
