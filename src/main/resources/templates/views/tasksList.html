@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Todo App</title>
+</head>
+
+<body>
+
+<div class="container">
+    <header class="container">
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <h3 class="card-header">Tasks list</h3>
+            <div class="card card-body">
+                <table class="table table-striped table-hover">
+
+                    <thead class="table-success">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+
+                        <th>Owner</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="task:${tasks}">
+                        <td th:text="${task.name}"></td>
+                        <td th:text="${task.description}"></td>
+                        <td th:text="${task.startDate}"></td>
+                        <td th:text="${task.endDate}"></td>
+
+                        <td th:text="${task.user}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
