@@ -26,7 +26,7 @@
                         <th>Description</th>
                         <th>Start date</th>
                         <th>End date</th>
-
+                        <th>Completed</th>
                         <th>Owner</th>
                     </tr>
                     </thead>
@@ -36,7 +36,7 @@
                         <td th:text="${task.description}"></td>
                         <td th:text="${task.startDate}"></td>
                         <td th:text="${task.endDate}"></td>
-
+                        <td th:text="${task.completed} ? 'yes' : 'no'"></td>
                         <td th:text="${task.user}"></td>
                     </tr>
                     </tbody>
