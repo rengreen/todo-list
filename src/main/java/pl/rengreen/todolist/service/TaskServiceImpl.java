@@ -8,7 +8,7 @@ import pl.rengreen.todolist.repository.TaskRepository;
 import java.util.List;
 
 @Service
-public class TaskServiceImpl {
+public class TaskServiceImpl implements TaskService{
     @Autowired
     private TaskRepository taskRepository;
 
