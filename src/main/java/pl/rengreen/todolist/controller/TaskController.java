@@ -24,7 +24,7 @@ public class TaskController {
     @GetMapping("task/new")
     public String newTask(Model model){
         model.addAttribute("task", new Task());
-        return "taskForm";
+        return "views/taskForm";
     }
 
     @PostMapping("task")

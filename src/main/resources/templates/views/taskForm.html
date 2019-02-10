@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>New Task - Todo App</title>
+</head>
+
+<body>
+
+<div class="container">
+    <header class="container">
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    </header>
+
+    <main class="container">
+        <form th:action="@{/task}" th:object="${task}" method="post">
+
+            <div class="form-group">
+                <label for="Name" class="form-control-label">Name</label>
+                <input type="text" class="form-control"
+                        th:field="*{name}" id="name" />
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="form-control-label">Description</label>
+                <textarea   class="form-control"
+                        th:field="*{description}" id="description">  </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="startDate" class="form-control-label">Start Date</label>
+                <input type="text" class="form-control"
+                       th:field="*{startDate}" id="startDate" />
+            </div>
+
+            <div class="form-group">
+                <label for="endDate" class="form-control-label">End Date</label>
+                <input type="text" class="form-control"
+                        th:field="*{endDate}" id="endDate" />
+            </div>
+
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </form>
+    </main>
+</div>
+</body>
+</html>
