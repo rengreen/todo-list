@@ -12,7 +12,13 @@ public class TaskServiceImpl implements TaskService{
     @Autowired
     private TaskRepository taskRepository;
 
+    @Override
     public List<Task> findAll() {
         return taskRepository.findAll();
+    }
+
+    @Override
+    public Task saveTask(Task task) {
+        return taskRepository.save(task);
     }
 }
