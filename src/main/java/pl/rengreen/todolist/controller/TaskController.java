@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.rengreen.todolist.service.TaskService;
+import pl.rengreen.todolist.service.TaskServiceImpl;
 
 @Controller
 public class TaskController {
 
     @Autowired
-    private TaskService taskService;
+    private TaskServiceImpl taskService;
 
     @RequestMapping("/tasks/")
     public String listUsers(Model model) {
