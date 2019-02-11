@@ -3,11 +3,14 @@ package pl.rengreen.todolist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.service.TaskService;
+
+import javax.validation.Valid;
 
 @Controller
 public class TaskController {
@@ -28,7 +31,10 @@ public class TaskController {
     }
 
     @PostMapping("task/new")
-    public String saveTask(Task task){
+    public String addTask(@Valid Task task, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "views/taskForm";
+        }
         taskService.saveTask(task);
         return "redirect:/tasks/";
     }

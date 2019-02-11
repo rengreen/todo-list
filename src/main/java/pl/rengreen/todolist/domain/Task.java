@@ -3,15 +3,20 @@ package pl.rengreen.todolist.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Task {
     @Id
     @GeneratedValue
     private Long id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String startDate;
+    @NotEmpty
     private String endDate;
     private boolean isCompleted;
     private String user;
