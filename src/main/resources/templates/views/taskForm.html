@@ -11,14 +11,14 @@
 
 <div class="container">
     <header class="container">
-        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+        <!--/*/ <th:block th:include="fragments/header :: header('tasks')"></th:block> /*/-->
     </header>
 
     <main class="container">
         <form th:action="@{/task}" th:object="${task}" method="post">
 
             <div class="form-group">
-                <label for="Name" class="form-control-label">Name</label>
+                <label for="name" class="form-control-label">Name</label>
                 <input type="text" class="form-control"
                         th:field="*{name}" id="name" />
             </div>
@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label for="startDate" class="form-control-label">Start Date</label>
                 <input type="text" class="form-control"
-                       th:field="*{startDate}" id="startDate" />
+                        th:field="*{startDate}" id="startDate" />
             </div>
 
             <div class="form-group">
