@@ -35,13 +35,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="task:${tasks}">
-                        <td th:text="${task.name}"></td>
-                        <td th:text="${task.description}"></td>
-                        <td th:text="${task.startDate}"></td>
-                        <td th:text="${task.endDate}"></td>
-                        <td th:text="${task.completed} ? 'yes' : 'no'"></td>
-                        <td th:text="${task.user}"></td>
+                    <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
+                        <td th:text="${t.name}"></td>
+                        <td th:text="${t.description}"></td>
+                        <td th:text="${t.startDate}"></td>
+                        <td th:text="${t.endDate}"></td>
+                        <td th:text="${t.completed} ? 'yes' : 'no'"></td>
+                        <td th:text="${t.user}"></td>
                     </tr>
                     </tbody>
                 </table>
