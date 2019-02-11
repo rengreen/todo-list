@@ -27,7 +27,7 @@ public class TaskController {
         return "views/taskForm";
     }
 
-    @PostMapping("task")
+    @PostMapping("task/new")
     public String saveTask(Task task){
         taskService.saveTask(task);
         return "redirect:/tasks/";
