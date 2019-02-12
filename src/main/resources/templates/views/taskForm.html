@@ -9,9 +9,8 @@
 
 <body>
 
-<div class="container">
-    <header class="container">
-        <!--/*/ <th:block th:include="fragments/header :: header('tasks')"></th:block> /*/-->
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('home')"></th:block> /*/-->
     </header>
 
     <main class="container">
@@ -52,6 +51,10 @@
             <input type="submit" value="Submit" class="btn btn-primary" />
         </form>
     </main>
-</div>
+
+    <footer class="footer">
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+    </footer>
+
 </body>
 </html>

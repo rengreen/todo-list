@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
     <title>Todo App</title>
@@ -7,8 +9,7 @@
 
 <body>
 
-<div class="container">
-    <header class="container">
+    <header>
         <!--/*/ <th:block th:include="fragments/header :: header('home')"></th:block> /*/-->
     </header>
 
@@ -24,6 +25,10 @@
             expedita facilis fugiat incidunt laborum mollitia natus non, officia officiis perferendis placeat, qui quos
             similique tempore voluptate voluptatem.</p>
     </main>
-</div>
+
+    <footer class="footer">
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+    </footer>
+
 </body>
 </html>
