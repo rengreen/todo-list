@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>About - Todo App</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('about')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <h1 class="display-3">Todo App</h1>
+    <p class="lead">Todo list and task manager that helps you get stuff done</p>
+    <hr class="my-4">
+    <ul>
+        <li>User login and registration</li>
+        <li>Create task (task name, task description, date of completion, status - completed or not)</li>
+        <li>Assign task to user</li>
+        <li>Edit task</li>
+        <li>Delete task</li>
+        <li>Mark task as completed</li>
+        <li>Display all tasks</li>
+    </ul>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+</body>
+</html>
