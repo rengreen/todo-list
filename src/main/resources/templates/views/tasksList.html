@@ -10,15 +10,13 @@
 <body>
 
     <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('home')"></th:block> /*/-->
+        <!--/*/ <th:block th:include="fragments/header :: header('tasks')"></th:block> /*/-->
     </header>
 
     <main class="container">
-        <div class="card">
+        <div class="card mb-3">
 
-            <h3 class="card-header">Tasks list
-                <span><a class="btn btn-outline-success btn-lg float-right" th:href="@{/task/new}">Add new task</a></span>
-            </h3>
+            <h3 class="card-header">Tasks list</h3>
 
             <div class="card card-body">
                 <table class="table table-striped table-hover">

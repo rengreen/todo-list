@@ -10,7 +10,7 @@
 <body>
 
     <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('home')"></th:block> /*/-->
+        <!--/*/ <th:block th:include="fragments/header :: header('add-task')"></th:block> /*/-->
     </header>
 
     <main class="container">
@@ -45,7 +45,7 @@
                 <input type="text" class="form-control"
                        th:field="*{endDate}" id="endDate" />
                 <div class="text text-danger"
-                     th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
+                     th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
             </div>
 
             <input type="submit" value="Submit" class="btn btn-primary" />
