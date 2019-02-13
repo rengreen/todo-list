@@ -34,7 +34,7 @@
 
             <div class="form-group">
                 <label for="startDate" class="form-control-label">Start Date</label>
-                <input type="text" class="form-control"
+                <input type="date" class="form-control"
                        th:field="*{startDate}" id="startDate" />
                 <div class="text text-danger"
                      th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <label for="endDate" class="form-control-label">End Date</label>
-                <input type="text" class="form-control"
+                <input type="date" class="form-control"
                        th:field="*{endDate}" id="endDate" />
                 <div class="text text-danger"
                      th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
