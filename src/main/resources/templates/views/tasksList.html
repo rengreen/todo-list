@@ -35,8 +35,12 @@
                     <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
                         <td th:text="${t.name}"></td>
                         <td th:text="${t.description}"></td>
-                        <td th:text="${t.startDate}"></td>
-                        <td th:text="${t.endDate}"></td>
+                        <td th:text="${#strings.substring(t.startDate+' ',8,10)}
+                            +'-'+${#strings.substring(t.startDate,5,7)}
+                            +'-'+${#strings.substring(t.startDate,0,4)}"></td>
+                        <td th:text="${#strings.substring(t.endDate+' ',8,10)}
+                            +'-'+${#strings.substring(t.endDate,5,7)}
+                            +'-'+${#strings.substring(t.endDate,0,4)}"></td>
                         <td th:text="${t.completed} ? 'yes' : 'no'"></td>
                         <td th:text="${t.user}"></td>
                     </tr>
