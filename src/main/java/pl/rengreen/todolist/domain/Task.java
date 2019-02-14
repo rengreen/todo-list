@@ -1,8 +1,6 @@
 package pl.rengreen.todolist.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -19,7 +17,9 @@ public class Task {
     @NotEmpty
     private String endDate;
     private boolean isCompleted;
-    private String user;
+    @ManyToOne
+    @JoinColumn(name = "USER_EMAIL")
+    private User user;
 
     public Task() {
     }
@@ -32,7 +32,7 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
-    public Task(String name, String description, String startDate, String endDate, boolean isCompleted, String user) {
+    public Task(String name, String description, String startDate, String endDate, boolean isCompleted, User user) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
@@ -89,11 +89,11 @@ public class Task {
         isCompleted = completed;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

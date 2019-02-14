@@ -6,25 +6,125 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import pl.rengreen.todolist.domain.Role;
 import pl.rengreen.todolist.domain.Task;
+import pl.rengreen.todolist.domain.User;
+import pl.rengreen.todolist.repository.RoleRepository;
 import pl.rengreen.todolist.repository.TaskRepository;
+import pl.rengreen.todolist.repository.UserRepository;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
-    private TaskRepository productRepository;
+    private RoleRepository roleRepository;
+    private UserRepository userRepository;
+    private TaskRepository taskRepository;
     private final Logger logger = LoggerFactory.getLogger(TaskLoader.class);
 
     @Autowired
-    public void setProductRepository(TaskRepository productRepository) {
-        this.productRepository = productRepository;
+    public void setRoleRepository(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    @Autowired
+    public void setTaskRepository(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         Task task;
-        //tasks from Web Design Checklist https://www.beewits.com/the-ultimate-web-design-checklist-things-to-do-when-launching-a-website/#Download_a_softcopy_of_the_checklist
 
+
+        //ROLES --------------------------------------------------------------------------------------------------------
+        //1
+        Role roleAdmin = new Role();
+        roleAdmin.setName("ADMIN");
+        roleRepository.save(roleAdmin);
+        logger.info("saved role: " + roleAdmin.getName());
+
+        //2
+        Role roleUser = new Role();
+        roleUser.setName("USER");
+        roleRepository.save(roleUser);
+        logger.info("saved role: " + roleUser.getName());
+
+        //USERS --------------------------------------------------------------------------------------------------------
+        //roles for Admin
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleAdmin);
+
+        //1
+        User admin = new User();
+        admin.setEmail("admin@mail.com");
+        admin.setName("admin");
+        admin.setPassword("adminadmin");
+        roles = new ArrayList<>();
+        roles.add(roleAdmin);
+        admin.setRoles(roles);
+        userRepository.save(admin);
+        logger.info("saved user: " + admin.getName());
+
+        //roles for Users
+        roles = new ArrayList<>();
+        roles.add(roleUser);
+
+        //2
+        User user = new User();
+        user.setEmail("user@mail.com");
+        user.setName("user");
+        user.setPassword("useruser");
+        user.setRoles(roles);
+        userRepository.save(user);
+        logger.info("saved user: " + user.getName());
+
+        //3
+        User userMark = new User();
+        userMark.setEmail("mark@mail.com");
+        userMark.setName("Mark");
+        userMark.setPassword("11111111");
+        userMark.setRoles(roles);
+        userRepository.save(userMark);
+        logger.info("saved user: " + userMark.getName());
+
+        //4
+        User userAnn = new User();
+        userAnn.setEmail("ann@supermail.com");
+        userAnn.setName("Ann");
+        userAnn.setPassword("11111111");
+        userAnn.setRoles(roles);
+        userRepository.save(userAnn);
+        logger.info("saved user: " + userAnn.getName());
+
+        //5
+        User userRalf = new User();
+        userRalf.setEmail("ralf@bestmail.com");
+        userRalf.setName("Ralf");
+        userRalf.setPassword("11111111");
+        userRalf.setRoles(roles);
+        userRepository.save(userRalf);
+        logger.info("saved user: " + userRalf.getName());
+
+        //6
+        User userKate = new User();
+        userKate.setEmail("kate@quickmail.com");
+        userKate.setName("Kate");
+        userKate.setPassword("11111111");
+        userKate.setRoles(roles);
+        userRepository.save(userKate);
+        logger.info("saved user: " + userKate.getName());
+
+        //TASKS --------------------------------------------------------------------------------------------------------
+        //tasks from Web Design Checklist https://www.beewits.com/the-ultimate-web-design-checklist-things-to-do-when-launching-a-website/#Download_a_softcopy_of_the_checklist
         //1
         task = new Task();
         task.setName("first meeting");
@@ -32,9 +132,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-01");
         task.setEndDate("2019-03-02");
         task.setCompleted(true);
-        task.setUser("Mark");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userMark);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //2
         task = new Task();
@@ -43,9 +143,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-02");
         task.setEndDate("2019-03-03");
         task.setCompleted(true);
-        task.setUser("Ann");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userAnn);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //3
         task = new Task();
@@ -54,9 +154,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-03");
         task.setEndDate("2019-03-04");
         task.setCompleted(true);
-        task.setUser("Ralf");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userRalf);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //4
         task = new Task();
@@ -65,9 +165,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-04");
         task.setEndDate("2019-03-05");
         task.setCompleted(true);
-        task.setUser("Kate");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userKate);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //5
         task = new Task();
@@ -76,9 +176,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-05");
         task.setEndDate("2019-03-06");
         task.setCompleted(false);
-        task.setUser("Tom");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userKate);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //6
         task = new Task();
@@ -87,9 +187,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-06");
         task.setEndDate("2019-03-07");
         task.setCompleted(false);
-        task.setUser("Mark");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userMark);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //7
         task = new Task();
@@ -98,9 +198,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-07");
         task.setEndDate("2019-03-08");
         task.setCompleted(false);
-        task.setUser("Mark");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userMark);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //8
         task = new Task();
@@ -109,9 +209,9 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-08");
         task.setEndDate("2019-03-09");
         task.setCompleted(false);
-        task.setUser("Ann");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        task.setUser(userAnn);
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //9
         task = new Task();
@@ -120,9 +220,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-09");
         task.setEndDate("2019-03-10");
         task.setCompleted(false);
-        task.setUser("Ann");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' with no user");
 
         //10
         task = new Task();
@@ -131,9 +230,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-10");
         task.setEndDate("2019-03-11");
         task.setCompleted(false);
-        task.setUser("Ann");
-        productRepository.save(task);
-        logger.info("saved task: " + task.getName()+ ", with id: " +task.getId());
+        taskRepository.save(task);
+        logger.info("saved task: '" + task.getName()+"' with no user");
     }
 }
 
