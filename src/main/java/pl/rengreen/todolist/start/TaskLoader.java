@@ -127,7 +127,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         //tasks from Web Design Checklist https://www.beewits.com/the-ultimate-web-design-checklist-things-to-do-when-launching-a-website/#Download_a_softcopy_of_the_checklist
         //1
         task = new Task();
-        task.setName("first meeting");
+        task.setName("First meeting");
         task.setDescription("Setup first meetings with client");
         task.setStartDate("2019-03-01");
         task.setEndDate("2019-03-02");
@@ -138,7 +138,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //2
         task = new Task();
-        task.setName("briefing document");
+        task.setName("Briefing document");
         task.setDescription("Define and collect briefing document from client");
         task.setStartDate("2019-03-02");
         task.setEndDate("2019-03-03");
@@ -149,7 +149,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //3
         task = new Task();
-        task.setName("project questionnaire");
+        task.setName("Project questionnaire");
         task.setDescription("Define and send project questionnaire to the client and wait for the client’s response. Finalize project questionnaire from client");
         task.setStartDate("2019-03-03");
         task.setEndDate("2019-03-04");
@@ -160,7 +160,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //4
         task = new Task();
-        task.setName("client’s company research");
+        task.setName("Client’s company research");
         task.setDescription("Research client’s company to understand their brand, the way they communicate, their demographics, target audience");
         task.setStartDate("2019-03-04");
         task.setEndDate("2019-03-05");
@@ -171,7 +171,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //5
         task = new Task();
-        task.setName("client’s industry research");
+        task.setName("Client’s industry research");
         task.setDescription("Research client’s industry to find ways of communicating specifically to the industry, strengths and weaknesses, and trends");
         task.setStartDate("2019-03-05");
         task.setEndDate("2019-03-06");
@@ -182,7 +182,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //6
         task = new Task();
-        task.setName("valuation of development effort");
+        task.setName("Valuation of development effort");
         task.setDescription("Get quotation for development effort for project");
         task.setStartDate("2019-03-06");
         task.setEndDate("2019-03-07");
@@ -193,7 +193,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //7
         task = new Task();
-        task.setName("valuation of designers work");
+        task.setName("Valuation of designers work");
         task.setDescription("Get quotation for design, estimate design work with designers");
         task.setStartDate("2019-03-07");
         task.setEndDate("2019-03-08");
@@ -204,7 +204,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //8
         task = new Task();
-        task.setName("valuation of copywriters work");
+        task.setName("Valuation of copywriters work");
         task.setDescription("Get quotation for copy/content, estimate work with copywriters");
         task.setStartDate("2019-03-08");
         task.setEndDate("2019-03-09");
@@ -215,7 +215,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //9
         task = new Task();
-        task.setName("valuation of photos/video");
+        task.setName("Valuation of photos/video");
         task.setDescription("Get quotation for photography/video production or estimate effort involved");
         task.setStartDate("2019-03-09");
         task.setEndDate("2019-03-10");
@@ -225,7 +225,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //10
         task = new Task();
-        task.setName("valuation of hosting/domain");
+        task.setName("Valuation of hosting/domain");
         task.setDescription("Get quotation for Hosting/Domain, particularly if specialized hosting is involved");
         task.setStartDate("2019-03-10");
         task.setEndDate("2019-03-11");
