@@ -19,7 +19,7 @@
             <h3 class="card-header">Tasks list</h3>
 
             <div class="card card-body">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover text-center">
 
                     <thead class="table-success">
                     <tr>
@@ -33,8 +33,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
-                        <td th:text="${t.name}"></td>
-                        <td th:text="${t.description}"></td>
+                        <td class="text-left" th:text="${t.name}"></td>
+                        <td class="text-left" th:text="${t.description}"></td>
                         <td th:text="${#strings.substring(t.startDate+' ',8,10)}
                             +'-'+${#strings.substring(t.startDate,5,7)}
                             +'-'+${#strings.substring(t.startDate,0,4)}"></td>
@@ -42,7 +42,7 @@
                             +'-'+${#strings.substring(t.endDate,5,7)}
                             +'-'+${#strings.substring(t.endDate,0,4)}"></td>
                         <td th:text="${t.completed} ? 'yes' : 'no'"></td>
-                        <td th:text="${t.user}"></td>
+                        <td th:text="${t.user!=null} ? ${t.user.getName()} : '-'"></td>
                     </tr>
                     </tbody>
                 </table>

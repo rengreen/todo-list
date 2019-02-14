@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.service.TaskService;
+import pl.rengreen.todolist.service.UserService;
 
 import javax.validation.Valid;
 
@@ -17,10 +17,13 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/tasks/")
     public String listTasks(Model model) {
         model.addAttribute("tasks", taskService.findAll());
+        model.addAttribute("users", userService.findAll());
         return "views/tasksList";
     }
 
