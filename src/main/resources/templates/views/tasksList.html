@@ -29,6 +29,9 @@
                         <th>End date</th>
                         <th>Completed</th>
                         <th>Owner</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,6 +46,9 @@
                             +'-'+${#strings.substring(t.endDate,0,4)}"></td>
                         <td th:text="${t.completed} ? 'yes' : 'no'"></td>
                         <td th:text="${t.user!=null} ? ${t.user.getName()} : '-'"></td>
+                        <td><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
+                        <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
+                        <td><a th:href="${'/task/delete/' + t.id}" class="btn btn-outline-danger btn-sm">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
