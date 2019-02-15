@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.service.TaskService;
@@ -39,6 +40,12 @@ public class TaskController {
             return "views/taskForm";
         }
         taskService.saveTask(task);
+        return "redirect:/tasks/";
+    }
+
+    @GetMapping("task/delete/{id}")
+    public String delete(@PathVariable Long id){
+        taskService.deleteTask(id);
         return "redirect:/tasks/";
     }
 }

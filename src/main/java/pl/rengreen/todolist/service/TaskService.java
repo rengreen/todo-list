@@ -7,4 +7,5 @@ public interface TaskService {
 
     List<Task> findAll();
     Task saveTask(Task task);
+    void deleteTask(Long id);
 }
