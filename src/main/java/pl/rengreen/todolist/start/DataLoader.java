@@ -15,12 +15,12 @@ import pl.rengreen.todolist.service.UserService;
 
 
 @Component
-public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private RoleService roleService;
     private UserService userService;
     private TaskService taskService;
-    private final Logger logger = LoggerFactory.getLogger(TaskLoader.class);
+    private final Logger logger = LoggerFactory.getLogger(DataLoader.class);
 
     @Autowired
     public void setRoleRepository(RoleService roleService) {
