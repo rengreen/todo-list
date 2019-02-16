@@ -8,4 +8,5 @@ public interface UserService {
     void createAdmin(User user);
     List<User> findAll();
     User getUserByEmail(String email);
+    boolean isUserPresent(String email);
 }
