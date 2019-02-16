@@ -16,7 +16,9 @@
     <main class="container">
         <div class="card mb-3">
 
-            <h3 class="card-header">Tasks list</h3>
+            <h3 class="card-header">Tasks list
+                <span><a class="btn btn-outline-success btn-lg float-right" th:href="@{/task/new}">Add task</a></span>
+            </h3>
 
             <div class="card card-body">
                 <table class="table table-striped table-hover text-center">
@@ -24,28 +26,28 @@
                     <thead class="table-success">
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
+                        <th>Owner</th>
                         <th>Start date</th>
                         <th>End date</th>
                         <th>Completed</th>
-                        <th>Owner</th>
-                        <th>View</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th colspan="3" class="text-left">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
                         <td class="text-left" th:text="${t.name}"></td>
-                        <td class="text-left" th:text="${t.description}"></td>
+                        <td th:text="${t.user!=null} ? ${t.user.getName()} : '-'"></td>
+
                         <td th:text="${#strings.substring(t.startDate+' ',8,10)}
                             +'-'+${#strings.substring(t.startDate,5,7)}
                             +'-'+${#strings.substring(t.startDate,0,4)}"></td>
                         <td th:text="${#strings.substring(t.endDate+' ',8,10)}
                             +'-'+${#strings.substring(t.endDate,5,7)}
                             +'-'+${#strings.substring(t.endDate,0,4)}"></td>
-                        <td th:text="${t.completed} ? 'yes' : 'no'"></td>
-                        <td th:text="${t.user!=null} ? ${t.user.getName()} : '-'"></td>
+                        <td>
+                            <span th:classappend="${t.completed} ? 'badge badge-success' : 'badge badge-danger'"
+                                    th:text="${t.completed} ? 'completed' : 'in progress'" ></span></td>
+
                         <td><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
                         <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
                         <td><a th:href="${'/task/delete/' + t.id}" class="btn btn-outline-danger btn-sm">Delete</a></td>
