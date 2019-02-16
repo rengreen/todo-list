@@ -9,35 +9,30 @@ import org.springframework.stereotype.Component;
 import pl.rengreen.todolist.domain.Role;
 import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.domain.User;
-import pl.rengreen.todolist.repository.RoleRepository;
-import pl.rengreen.todolist.repository.TaskRepository;
-import pl.rengreen.todolist.repository.UserRepository;
+import pl.rengreen.todolist.service.RoleService;
+import pl.rengreen.todolist.service.TaskService;
+import pl.rengreen.todolist.service.UserService;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
-    private TaskRepository taskRepository;
+    private RoleService roleService;
+    private UserService userService;
+    private TaskService taskService;
     private final Logger logger = LoggerFactory.getLogger(TaskLoader.class);
 
     @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public void setRoleRepository(RoleService roleService) {
+        this.roleService = roleService;
     }
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
     @Autowired
-    public void setTaskRepository(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public void setTaskRepository(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @Override
@@ -46,82 +41,50 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
 
 
         //ROLES --------------------------------------------------------------------------------------------------------
-        //1
-        Role roleAdmin = new Role();
-        roleAdmin.setName("ADMIN");
-        roleRepository.save(roleAdmin);
+        Role roleAdmin = new Role("ADMIN");
+        roleService.saveRole(new Role("ADMIN"));
         logger.info("saved role: " + roleAdmin.getName());
 
-        //2
-        Role roleUser = new Role();
-        roleUser.setName("USER");
-        roleRepository.save(roleUser);
+        Role roleUser = new Role("USER");
+        roleService.saveRole(roleUser);
         logger.info("saved role: " + roleUser.getName());
 
         //USERS --------------------------------------------------------------------------------------------------------
-        //roles for Admin
-        List<Role> roles = new ArrayList<>();
-        roles.add(roleAdmin);
-
         //1
-        User admin = new User();
-        admin.setEmail("admin@mail.com");
-        admin.setName("admin");
-        admin.setPassword("adminadmin");
-        roles = new ArrayList<>();
-        roles.add(roleAdmin);
-        admin.setRoles(roles);
-        userRepository.save(admin);
+        User admin = new User("admin@mail.com", "admin", "adminadmin");
+        userService.createAdmin(admin);
         logger.info("saved user: " + admin.getName());
 
-        //roles for Users
-        roles = new ArrayList<>();
-        roles.add(roleUser);
-
         //2
-        User user = new User();
-        user.setEmail("user@mail.com");
-        user.setName("user");
-        user.setPassword("useruser");
-        user.setRoles(roles);
-        userRepository.save(user);
+        User user = new User("user@mail.com", "user","useruser");
+        userService.createUser(user);
         logger.info("saved user: " + user.getName());
 
         //3
-        User userMark = new User();
-        userMark.setEmail("mark@mail.com");
-        userMark.setName("Mark");
-        userMark.setPassword("11111111");
-        userMark.setRoles(roles);
-        userRepository.save(userMark);
-        logger.info("saved user: " + userMark.getName());
+        user = new User("mark@mail.com", "Mark", "11111111");
+        userService.createUser(user);
+        logger.info("saved user: " + user.getName());
 
         //4
-        User userAnn = new User();
-        userAnn.setEmail("ann@supermail.com");
-        userAnn.setName("Ann");
-        userAnn.setPassword("11111111");
-        userAnn.setRoles(roles);
-        userRepository.save(userAnn);
-        logger.info("saved user: " + userAnn.getName());
+        user = new User("ann@supermail.com", "Ann", "11111111");
+        userService.createUser(user);
+        logger.info("saved user: " + user.getName());
 
         //5
-        User userRalf = new User();
-        userRalf.setEmail("ralf@bestmail.com");
-        userRalf.setName("Ralf");
-        userRalf.setPassword("11111111");
-        userRalf.setRoles(roles);
-        userRepository.save(userRalf);
-        logger.info("saved user: " + userRalf.getName());
+        user = new User("ralf@bestmail.com", "Ralf", "11111111");
+        userService.createUser(user);
+        logger.info("saved user: " + user.getName());
 
         //6
+        user = new User("kate@quickmail.com", "Kate", "11111111");
+        userService.createUser(user);
+        logger.info("saved user: " + user.getName());
         User userKate = new User();
-        userKate.setEmail("kate@quickmail.com");
-        userKate.setName("Kate");
-        userKate.setPassword("11111111");
-        userKate.setRoles(roles);
-        userRepository.save(userKate);
-        logger.info("saved user: " + userKate.getName());
+
+        //7
+        user = new User("tom@fakemail.com", "Tom", "11111111");
+        userService.createUser(user);
+        logger.info("saved user: " + user.getName());
 
         //TASKS --------------------------------------------------------------------------------------------------------
         //tasks from Web Design Checklist https://www.beewits.com/the-ultimate-web-design-checklist-things-to-do-when-launching-a-website/#Download_a_softcopy_of_the_checklist
@@ -132,8 +95,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-01");
         task.setEndDate("2019-03-02");
         task.setCompleted(true);
-        task.setUser(userMark);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("mark@mail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //2
@@ -143,8 +106,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-02");
         task.setEndDate("2019-03-03");
         task.setCompleted(true);
-        task.setUser(userAnn);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("ann@supermail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //3
@@ -154,8 +117,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-03");
         task.setEndDate("2019-03-04");
         task.setCompleted(true);
-        task.setUser(userRalf);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("ralf@bestmail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //4
@@ -165,8 +128,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-04");
         task.setEndDate("2019-03-05");
         task.setCompleted(true);
-        task.setUser(userKate);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("kate@quickmail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //5
@@ -176,8 +139,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-05");
         task.setEndDate("2019-03-06");
         task.setCompleted(false);
-        task.setUser(userKate);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("kate@quickmail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //6
@@ -187,8 +150,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-06");
         task.setEndDate("2019-03-07");
         task.setCompleted(false);
-        task.setUser(userMark);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("mark@mail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //7
@@ -198,8 +161,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-07");
         task.setEndDate("2019-03-08");
         task.setCompleted(false);
-        task.setUser(userMark);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("mark@mail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //8
@@ -209,8 +172,8 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-08");
         task.setEndDate("2019-03-09");
         task.setCompleted(false);
-        task.setUser(userAnn);
-        taskRepository.save(task);
+        task.setUser(userService.getUserByEmail("ann@supermail.com"));
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
         //9
@@ -220,7 +183,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-09");
         task.setEndDate("2019-03-10");
         task.setCompleted(false);
-        taskRepository.save(task);
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' with no user");
 
         //10
@@ -230,7 +193,7 @@ public class TaskLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setStartDate("2019-03-10");
         task.setEndDate("2019-03-11");
         task.setCompleted(false);
-        taskRepository.save(task);
+        taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' with no user");
     }
 }
