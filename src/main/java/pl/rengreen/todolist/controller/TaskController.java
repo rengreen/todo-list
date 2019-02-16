@@ -39,7 +39,7 @@ public class TaskController {
         if(bindingResult.hasErrors()){
             return "views/taskForm";
         }
-        taskService.saveTask(task);
+        taskService.createTask(task);
         return "redirect:/tasks/";
     }
 
