@@ -48,9 +48,9 @@
                             <span th:classappend="${t.completed} ? 'badge badge-success' : 'badge badge-danger'"
                                     th:text="${t.completed} ? 'completed' : 'in progress'" ></span></td>
 
-                        <td><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
-                        <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
-                        <td><a th:href="${'/task/delete/' + t.id}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                        <td class="text-left"><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
+                        <td class="text-left"><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
+                        <td class="text-left"><a th:href="${'/task/delete/' + t.id}" class="btn btn-outline-danger btn-sm">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Tasks List - Todo App</title>
+</head>
+
+<body>
+
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('users')"></th:block> /*/-->
+    </header>
+
+    <main class="container">
+        <div class="card mb-3">
+
+            <h3 class="card-header">Users list</h3>
+
+            <div class="card card-body">
+                <table class="table table-striped table-hover text-center">
+
+                    <thead class="table-info">
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Email</th>
+
+                        <th colspan="3" class="text-left">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user:${users}">
+                        <td th:text="${user.name}"></td>
+                        <td th:each="role : ${user.roles}" th:text="${role.getName()}+' '"></td>
+                        <td th:text="${user.email}"></td>
+
+                        <td class="text-left" ><a th:href="${'/task/' + user.email}" class="btn btn-outline-info btn-sm">View</a></td>
+                        <td class="text-left" ><a th:href="${'/task/edit/' + user.email}" class="btn btn-outline-success btn-sm">Edit</a></td>
+                        <td class="text-left" ><a th:href="${'/task/delete/' + user.email}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+    </footer>
+
+</body>
+</html>
