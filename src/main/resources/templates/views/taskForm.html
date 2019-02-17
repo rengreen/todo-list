@@ -9,52 +9,75 @@
 
 <body>
 
-    <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('add-task')"></th:block> /*/-->
-    </header>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('add-task')"></th:block> /*/-->
+</header>
 
-    <main class="container">
-        <form th:action="@{/task/new}" th:object="${task}" method="post">
+<main class="container">
+    <div class="card mb-3">
 
-            <div class="form-group">
-                <label for="name" class="form-control-label">Name</label>
-                <input type="text" class="form-control"
-                       th:field="*{name}" id="name" />
-                <div class="text text-danger"
-                     th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-            </div>
+        <h3 class="card-header">Create new Task</h3>
 
-            <div class="form-group">
-                <label for="description" class="form-control-label">Description</label>
-                <textarea   class="form-control"
-                            th:field="*{description}" id="description">  </textarea>
-                <div class="text text-danger"
-                     th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-            </div>
+        <div class="card card-body">
+            <form th:action="@{/task/new}" th:object="${task}" method="post">
 
-            <div class="form-group">
-                <label for="startDate" class="form-control-label">Start Date</label>
-                <input type="date" class="form-control"
-                       th:field="*{startDate}" id="startDate" />
-                <div class="text text-danger"
-                     th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
-            </div>
+                <div class="form-group">
+                    <label for="name" class="form-control-label">Task name</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-pen"></i></span>
+                        </div >
+                    <input type="text" class="form-control"
+                           th:field="*{name}" id="name"/>
+                    </div>
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
 
-            <div class="form-group">
-                <label for="endDate" class="form-control-label">End Date</label>
-                <input type="date" class="form-control"
-                       th:field="*{endDate}" id="endDate" />
-                <div class="text text-danger"
-                     th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
-            </div>
+                <div class="form-group">
+                    <label for="description" class="form-control-label">Task description</label>
+                    <textarea class="form-control"
+                              th:field="*{description}" id="description">  </textarea>
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+                </div>
 
-            <input type="submit" value="Submit" class="btn btn-primary" />
-        </form>
-    </main>
+                <div class="form-group">
+                    <label for="startDate" class="form-control-label">Start date</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div >
+                    <input type="date" class="form-control"
+                           th:field="*{startDate}" id="startDate"/>
+                    </div>
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
+                </div>
 
-    <footer class="footer">
-        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
-    </footer>
+                <div class="form-group">
+                    <label for="endDate" class="form-control-label">End date</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div >
+                    <input type="date" class="form-control"
+                           th:field="*{endDate}" id="endDate"/>
+                    </div>
+                    <div class="text text-danger"
+                         th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
+                </div>
+
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
 
 </body>
 </html>

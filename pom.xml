@@ -78,6 +78,12 @@
             <artifactId>bootstrap</artifactId>
             <version>4.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.7.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
