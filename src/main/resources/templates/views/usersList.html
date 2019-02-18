@@ -24,8 +24,8 @@
                     <thead class="table-info">
                     <tr>
                         <th>Name</th>
-                        <th>Role</th>
                         <th>Email</th>
+                        <th class="text-left">Assigned tasks</th>
 
                         <th colspan="3" class="text-left">Actions</th>
                     </tr>
@@ -33,8 +33,10 @@
                     <tbody>
                     <tr th:each="user:${users}">
                         <td th:text="${user.name}"></td>
-                        <td th:each="role : ${user.roles}" th:text="${role.getName()}+' '"></td>
                         <td th:text="${user.email}"></td>
+
+                        <td class="text-left" th:if="${user.tasks.size()!=0}"><div th:each="t : ${user.tasks}" th:text="${t.name}"></div></td>
+                        <td class="text-left" th:unless="${user.tasks.size()!=0}">no task</td>
 
                         <td class="text-left" ><a th:href="${'/task/' + user.email}" class="btn btn-outline-info btn-sm">View</a></td>
                         <td class="text-left" ><a th:href="${'/task/edit/' + user.email}" class="btn btn-outline-success btn-sm">Edit</a></td>
