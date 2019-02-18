@@ -21,7 +21,7 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/tasks/")
+    @GetMapping("/tasks")
     public String listTasks(Model model) {
         model.addAttribute("tasks", taskService.findAll());
         model.addAttribute("users", userService.findAll());
@@ -29,24 +29,24 @@ public class TaskController {
     }
 
     @GetMapping("task/new")
-    public String newTask(Model model){
+    public String showTaskForm(Model model){
         model.addAttribute("task", new Task());
         return "views/taskForm";
     }
 
     @PostMapping("task/new")
-    public String addTask(@Valid Task task, BindingResult bindingResult) {
+    public String createTask(@Valid Task task, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "views/taskForm";
         }
         taskService.createTask(task);
-        return "redirect:/tasks/";
+        return "redirect:/tasks";
     }
 
     @GetMapping("task/delete/{id}")
-    public String delete(@PathVariable Long id){
+    public String deleteTask(@PathVariable Long id){
         taskService.deleteTask(id);
-        return "redirect:/tasks/";
+        return "redirect:/tasks";
     }
 }
 

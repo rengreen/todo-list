@@ -17,7 +17,7 @@ public class RegisterController {
     UserService userService;
 
     @GetMapping("/register")
-    public String newUser(Model model){
+    public String showRegisterForm(Model model){
         model.addAttribute("user", new User());
         return "views/registerForm";
     }
