@@ -29,17 +29,32 @@ public class TaskController {
     }
 
     @GetMapping("task/new")
-    public String showTaskForm(Model model){
+    public String showEmptyTaskForm(Model model){
         model.addAttribute("task", new Task());
-        return "views/taskForm";
+        return "views/emptyTaskForm";
     }
 
     @PostMapping("task/new")
     public String createTask(@Valid Task task, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            return "views/taskForm";
+            return "views/emptyTaskForm";
         }
         taskService.createTask(task);
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("task/edit/{id}")
+    public String showFilledTaskForm(@PathVariable Long id, Model model){
+        model.addAttribute("task", taskService.getTaskById(id));
+        return "views/filledTaskForm";
+    }
+
+    @PostMapping("task/edit/{id}")
+    public String updateTask(@Valid Task task, BindingResult bindingResult, @PathVariable Long id, Model model) {
+        if(bindingResult.hasErrors()){
+            return "views/filledTaskForm";
+        }
+        taskService.updateTask(id, task);
         return "redirect:/tasks";
     }
 
