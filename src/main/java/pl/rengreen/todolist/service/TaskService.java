@@ -10,4 +10,7 @@ public interface TaskService {
     void updateTask(Long id, Task updatedTask);
     void deleteTask(Long id);
     Task getTaskById(Long id);
+
+    void setTaskCompleted(Long id);
+    void setTaskNotCompleted(Long id);
 }
