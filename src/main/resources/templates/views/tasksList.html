@@ -21,11 +21,11 @@
             </h3>
 
             <div class="card card-body">
-                <table class="my-tab table table-striped table-hover text-center">
+                <table class="my-tab table table-striped table-hover text-left">
 
                     <thead class="table-success">
                     <tr>
-                        <th>Name</th>
+                        <th>Task name</th>
                         <th>Owner</th>
                         <th>Start date</th>
                         <th>End date</th>
@@ -35,8 +35,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
-                        <td class="text-left" th:text="${t.name}"></td>
-                        <td th:text="${t.user!=null} ? ${t.user.getName()} : '-'"></td>
+                        <td th:text="${t.name}"></td>
+                        <td th:text="${t.user!=null} ? ${t.user.getName()} : ' '"></td>
 
                         <td th:text="${#strings.substring(t.startDate+' ',8,10)}
                             +'-'+${#strings.substring(t.startDate,5,7)}
@@ -45,15 +45,15 @@
                             +'-'+${#strings.substring(t.endDate,5,7)}
                             +'-'+${#strings.substring(t.endDate,0,4)}"></td>
 
-                        <td class="text-left" th:id="row+${t.id}">
+                        <td th:id="row+${t.id}">
                             <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"
                                th:classappend="${t.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
                                th:text="${t.completed} ? 'completed' : 'in progress'"></a>
                         </td>
 
-                        <td class="text-left"><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
-                        <td class="text-left"><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
-                        <td class="text-left"><a th:href="${'/task/delete/' + t.id}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                        <td><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
+                        <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
+                        <td><a th:href="${'/task/delete/' + t.id}" class="btn btn-outline-danger btn-sm">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
