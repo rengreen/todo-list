@@ -56,6 +56,8 @@
 
                         <td><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
                         <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
+
+                        <!--delete button-->
                         <td>
                             <a data-toggle="modal" data-target="#modal-delete"
                                th:attr="data-target='#modal-delete'+${t.id}"
@@ -64,6 +66,7 @@
                             </a>
                         </td>
 
+                        <!--modal for confirmation of delete-->
                         <div class="modal modal-delete" th:id="modal-delete+${t.id }">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -84,6 +87,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--modal end-->
 
                     </tr>
                     </tbody>
@@ -96,6 +100,7 @@
         <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
     </footer>
 
+    <!--remain scroll position after redirect-->
     <script>
         $(window).scroll(function() {
             sessionStorage.scrollTop = $(this).scrollTop();
@@ -108,6 +113,7 @@
         });
     </script>
 
+    <!--modal for confirmation of delete-->
     <script>
         $('#modal-delete').on('show.bs.modal', function (e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
