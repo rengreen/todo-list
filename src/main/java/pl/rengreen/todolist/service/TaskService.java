@@ -1,6 +1,8 @@
 package pl.rengreen.todolist.service;
 
 import pl.rengreen.todolist.domain.Task;
+import pl.rengreen.todolist.domain.User;
+
 import java.util.List;
 
 public interface TaskService {
@@ -13,4 +15,6 @@ public interface TaskService {
 
     void setTaskCompleted(Long id);
     void setTaskNotCompleted(Long id);
+
+    List<Task> findTasksByUser(User user);
 }

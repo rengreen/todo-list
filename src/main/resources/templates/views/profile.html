@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Tasks List - Todo App</title>
+</head>
+
+<body>
+
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('profile')"></th:block> /*/-->
+    </header>
+
+    <main class="container">
+        <div class="card mb-3">
+
+            <h3 class="card-header">Tasks list
+                <span><a class="btn btn-outline-success btn-lg float-right" th:href="@{/task/new}">Create new task</a></span>
+            </h3>
+
+            <div class="card card-body">
+                <table class="my-tab table table-striped table-hover text-left">
+
+                    <thead class="table-success">
+                    <tr>
+                        <th>Task name</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Completed</th>
+                        <th colspan="3">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
+                        <td th:text="${t.name}"></td>
+
+                        <td th:text="${#strings.substring(t.startDate+' ',8,10)}
+                            +'-'+${#strings.substring(t.startDate,5,7)}
+                            +'-'+${#strings.substring(t.startDate,0,4)}"></td>
+                        <td th:text="${#strings.substring(t.endDate+' ',8,10)}
+                            +'-'+${#strings.substring(t.endDate,5,7)}
+                            +'-'+${#strings.substring(t.endDate,0,4)}"></td>
+
+                        <td th:id="row+${t.id}">
+                            <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"
+                               th:classappend="${t.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
+                               th:text="${t.completed} ? 'completed' : 'in progress'"></a>
+                        </td>
+
+                        <td><a th:href="${'/task/' + t.id}" class="btn btn-outline-info btn-sm">View</a></td>
+                        <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
+
+                        <!--delete button-->
+                        <td>
+                            <a data-toggle="modal" data-target="#modal-delete"
+                               th:attr="data-target='#modal-delete'+${t.id}"
+                               th:href="${'/task/delete/' + t.id}"
+                               class="btn btn-outline-danger btn-sm">Delete
+                            </a>
+                        </td>
+
+                        <!--modal for confirmation of delete-->
+                        <div class="modal modal-delete" th:id="modal-delete+${t.id }">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title text-danger">Delete Confirmation</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p th:text="${'Are you sure you want to delete task: &quot '+t.name+'&quot?'}"></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                                        <a th:href="${'/task/delete/' + t.id}">
+                                            <span class="btn btn-danger">Delete</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--modal end-->
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+    </footer>
+
+    <!--remain scroll position after redirect-->
+    <script>
+        $(window).scroll(function() {
+            sessionStorage.scrollTop = $(this).scrollTop();
+        });
+
+        $(document).ready(function() {
+            if (sessionStorage.scrollTop !== "undefined") {
+                $(window).scrollTop(sessionStorage.scrollTop);
+            }
+        });
+    </script>
+
+    <!--modal for confirmation of delete-->
+    <script>
+        $('#modal-delete').on('show.bs.modal', function (e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+
+    </script>
+
+</body>
+</html>

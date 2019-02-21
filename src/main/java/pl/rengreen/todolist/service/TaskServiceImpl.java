@@ -3,6 +3,7 @@ package pl.rengreen.todolist.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.rengreen.todolist.domain.Task;
+import pl.rengreen.todolist.domain.User;
 import pl.rengreen.todolist.repository.TaskRepository;
 
 import java.util.List;
@@ -56,5 +57,10 @@ public class TaskServiceImpl implements TaskService{
         Task task = taskRepository.getOne(id);
         task.setCompleted(false);
         taskRepository.save(task);
+    }
+
+    @Override
+    public List<Task> findTasksByUser(User user) {
+        return taskRepository.findByUser(user);
     }
 }
