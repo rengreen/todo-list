@@ -1,4 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="eng"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 
 <header th:fragment="header(activeTab)">
 
@@ -15,16 +17,20 @@
                 <li th:class="${activeTab == '/'}? 'active nav-item mx-2' : 'nav-item mr-4 ml-2'">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li th:class="${activeTab == 'tasks'}? 'active nav-item mx-2' : 'nav-item mx-2'">
+                <li th:class="${activeTab == 'tasks'}? 'active nav-item mx-2' : 'nav-item mx-2'"
+                    sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="/tasks">Tasks</a>
                 </li>
-                <li th:class="${activeTab == 'add-task'}? 'active nav-item mx-2' : 'nav-item mx-2'">
+                <li th:class="${activeTab == 'add-task'}? 'active nav-item mx-2' : 'nav-item mx-2'"
+                    sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/task/new">New task</a>
                 </li>
-                <li th:class="${activeTab == 'users'}? 'active nav-item mx-2' : 'nav-item mx-2'">
+                <li th:class="${activeTab == 'users'}? 'active nav-item mx-2' : 'nav-item mx-2'"
+                    sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="/users">Users</a>
                 </li>
-                <li th:class="${activeTab == 'profile'}? 'active nav-item mx-2' : 'nav-item mx-2'">
+                <li th:class="${activeTab == 'profile'}? 'active nav-item mx-2' : 'nav-item mx-2'"
+                    sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
                 <li th:class="${activeTab == 'about'}? 'active nav-item mx-2' : 'nav-item mx-2'">
@@ -33,10 +39,12 @@
             </ul>
 
             <ul class="navbar-nav">
-                <li th:class="${activeTab == 'register'}? 'active nav-item mx-2' : 'nav-item mx-2'">
+                <li th:class="${activeTab == 'register'}? 'active nav-item mx-2' : 'nav-item mx-2'"
+                    sec:authorize="!isAuthenticated()">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
-                <li th:class="${activeTab == 'login'}? 'active nav-item mx-2' : 'nav-item mx-2'">
+                <li th:class="${activeTab == 'login'}? 'active nav-item mx-2' : 'nav-item mx-2'"
+                    sec:authorize="!isAuthenticated()">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
             </ul>
