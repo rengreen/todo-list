@@ -29,6 +29,7 @@
                 <thead class="table-success">
                 <tr>
                     <th>Task name</th>
+                    <th>Description</th>
                     <th>Start date</th>
                     <th>End date</th>
                     <th>Completed</th>
@@ -37,6 +38,7 @@
                 <tbody>
                 <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
                     <td th:text="${t.name}"></td>
+                    <td th:text="${t.description}"></td>
 
                     <td th:text="${#strings.substring(t.startDate+' ',8,10)}
                             +'-'+${#strings.substring(t.startDate,5,7)}
