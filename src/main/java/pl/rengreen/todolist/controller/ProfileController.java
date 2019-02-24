@@ -13,11 +13,18 @@ import java.security.Principal;
 @Controller
 public class ProfileController {
 
-    @Autowired
     private UserService userService;
+    private TaskService taskService;
 
     @Autowired
-    private TaskService taskService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setTaskRepository(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping("/profile")
     public String showProfilePage(Model model, Principal principal){

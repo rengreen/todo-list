@@ -10,14 +10,16 @@ import pl.rengreen.todolist.service.UserService;
 @Controller
 public class UserController {
 
-    @Autowired
     private UserService userService;
+
     @Autowired
-    private TaskService taskService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
 
    @GetMapping("/users")
     public String listUsers(Model model) {
-        model.addAttribute("users", userService.findAll());
         model.addAttribute("users", userService.findAll());
         return "views/usersList";
     }

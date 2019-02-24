@@ -13,8 +13,13 @@ import javax.validation.Valid;
 
 @Controller
 public class RegisterController {
+
+    private UserService userService;
+
     @Autowired
-    UserService userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/register")
     public String showRegisterForm(Model model){

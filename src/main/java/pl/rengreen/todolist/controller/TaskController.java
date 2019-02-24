@@ -16,10 +16,18 @@ import javax.validation.Valid;
 @Controller
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
-    @Autowired
     private UserService userService;
+    private TaskService taskService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setTaskRepository(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping("/tasks")
     public String listTasks(Model model) {
