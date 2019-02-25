@@ -6,6 +6,7 @@ import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.domain.User;
 import pl.rengreen.todolist.repository.TaskRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,5 +63,22 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public List<Task> findTasksByUser(User user) {
         return taskRepository.findByUser(user);
+    }
+
+    @Override
+    public void assignUserToTask(Task task, User user) {
+
+    }
+
+    @Override
+    public List<Task> findFreeTasks() {
+        List<Task> allTasks=taskRepository.findAll();
+        List<Task> freeTasks=new ArrayList<>();
+        for(Task item: allTasks) {
+            if(item.getUser()==null) {
+                freeTasks.add(item);
+            }
+        }
+        return freeTasks;
     }
 }

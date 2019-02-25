@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.rengreen.todolist.domain.Role;
+import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.domain.User;
 import pl.rengreen.todolist.repository.UserRepository;
 
@@ -53,5 +54,15 @@ public class UserServiceImpl implements UserService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void assignTasksToUser(List<Task> newTasksList, User user) {
+        List<Task> tasksList = user.getTasks();
+        for(Task item: newTasksList) {
+            tasksList.add(item);
+        }
+        user.setTasks(tasksList);
+        userRepository.save(user);
     }
 }

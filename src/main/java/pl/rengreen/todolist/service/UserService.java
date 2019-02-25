@@ -1,5 +1,6 @@
 package pl.rengreen.todolist.service;
 
+import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.domain.User;
 import java.util.List;
 
@@ -9,4 +10,6 @@ public interface UserService {
     List<User> findAll();
     User getUserByEmail(String email);
     boolean isUserPresent(String email);
+
+    void assignTasksToUser(List<Task> newTasksList, User user);
 }
