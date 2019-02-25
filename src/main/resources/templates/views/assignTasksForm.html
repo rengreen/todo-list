@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Register - Todo App</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('register')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="card mb-3">
+
+        <div class="card-header">
+            <h3>
+                <span>Tasks assigned to </span>
+                <span class="text text-success" th:text="${user.name}"></span>
+                <span th:text="' ('+${user.email}+')'"></span>
+            </h3>
+        </div>
+
+        <div class="card card-body">
+
+
+            <table class="my-tab table table-striped table-hover text-left">
+
+                <thead class="thead-white">
+                <tr>
+                    <th colspan="5"><h3>Users Tasks</h3></th>
+                </tr>
+
+                <thead class="table-success">
+                <tr>
+                    <th>Task name</th>
+                    <th>Description</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Completed</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="ut:${userTasks}">
+
+                    <td th:text="${ut.name}"></td>
+                    <td th:text="${ut.description}"></td>
+
+                    <td th:text="${#strings.substring(ut.startDate+' ',8,10)}
+                            +'-'+${#strings.substring(ut.startDate,5,7)}
+                            +'-'+${#strings.substring(ut.startDate,0,4)}"></td>
+                    <td th:text="${#strings.substring(ut.endDate+' ',8,10)}
+                            +'-'+${#strings.substring(ut.endDate,5,7)}
+                            +'-'+${#strings.substring(ut.endDate,0,4)}"></td>
+
+                    <td th:id="row+${ut.id}">
+                        <a th:href="${ut.completed} ? ${'/task/markUndone/' + ut.id} : ${'/task/markDone/' + ut.id}"
+                           th:classappend="${ut.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
+                           th:text="${ut.completed} ? 'completed' : 'in progress'"></a>
+                    </td>
+
+                </tr>
+                </tbody>
+
+                <thead class="thead-white mt-3">
+                <tr>
+                    <th colspan="5"><h3>Free tasks</h3></th>
+                </tr>
+
+                <thead class="table-success">
+                <tr>
+                    <th>Task name</th>
+                    <th>Description</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Completed</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="ft:${freeTasks}">
+                    <td th:text="${ft.name}"></td>
+                    <td th:text="${ft.description}"></td>
+
+                    <td th:text="${#strings.substring(ft.startDate+' ',8,10)}
+                            +'-'+${#strings.substring(ft.startDate,5,7)}
+                            +'-'+${#strings.substring(ft.startDate,0,4)}"></td>
+                    <td th:text="${#strings.substring(ft.endDate+' ',8,10)}
+                            +'-'+${#strings.substring(ft.endDate,5,7)}
+                            +'-'+${#strings.substring(ft.endDate,0,4)}"></td>
+
+                    <td th:id="row+${ft.id}">
+                        <a th:href="${ft.completed} ? ${'/task/markUndone/' + ft.id} : ${'/task/markDone/' + ft.id}"
+                           th:classappend="${ft.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
+                           th:text="${ft.completed} ? 'completed' : 'in progress'"></a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+</body>
+</html>
