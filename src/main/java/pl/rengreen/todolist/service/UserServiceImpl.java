@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public void createUser(User user){
+    public void createUser(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         Role roleUser = new Role("USER");
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void createAdmin(User user){
+    public void createAdmin(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         Role roleUser = new Role("ADMIN");
@@ -54,15 +54,5 @@ public class UserServiceImpl implements UserService{
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void assignTasksToUser(List<Task> newTasksList, User user) {
-        List<Task> tasksList = user.getTasks();
-        for(Task item: newTasksList) {
-            tasksList.add(item);
-        }
-        user.setTasks(tasksList);
-        userRepository.save(user);
     }
 }

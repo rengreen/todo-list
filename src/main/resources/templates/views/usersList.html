@@ -38,7 +38,7 @@
                         <td th:if="${user.tasks.size()!=0}"><div th:each="t : ${user.tasks}" th:text="${t.name}"></div></td>
                         <td th:unless="${user.tasks.size()!=0}">no task</td>
 
-                        <td><a th:href="@{/user/assignTasks(email=${user.email})}" class="btn btn-primary btn-sm">Assign tasks</a></td>
+                        <td><a th:href="@{'/user/assignTasks/'+${user.email}}" class="btn btn-primary btn-sm">Assign tasks</a></td>
                         <td ><a th:href="${'/user/' + user.email}" class="btn btn-outline-info btn-sm">User profile</a></td>
                         <td ><a th:href="${'/user/delete/' + user.email}" class="btn btn-outline-danger btn-sm">Delete user</a></td>
                     </tr>

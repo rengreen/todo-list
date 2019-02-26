@@ -67,7 +67,8 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public void assignUserToTask(Task task, User user) {
-
+        task.setUser(user);
+        taskRepository.save(task);
     }
 
     @Override
