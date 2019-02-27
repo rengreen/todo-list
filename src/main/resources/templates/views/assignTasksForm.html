@@ -15,96 +15,89 @@
 
 <main class="container">
     <div class="card mb-3">
+        <h3 class="card-header">
+            <span>Assign tasks to </span>
+            <span class="text text-success" th:text="${user.name}"></span>
+            <span th:text="' ('+${user.email}+')'"></span>
+        </h3>
+        <div class="card-body">
+            <div class="row">
 
-        <div class="card card-body">
-
-
-            <table class="my-tab table table-hover text-left">
-                <h3 class="card-header">Assign tasks</h3>
-
-                <thead class="thead-white">
-                <tr>
-                    <th colspan="5">
-                        <h4>
-                            <span>List of tasks actually assigned to </span>
+                <div class="col">
+                    <div class="card">
+                        <h4 class="card-header">
+                            <span>Tasks assigned to </span>
                             <span class="text text-success" th:text="${user.name}"></span>
-                            <span th:text="' ('+${user.email}+')'"></span>
                         </h4>
-                    </th>
-                </tr>
-                </thead>
-                <thead class="table-success">
-                <tr>
-                    <th>Task name</th>
-                    <th>Description</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Completed</th>
-                </tr>
-                </thead>
+                        <table class="my-tab table table-hover text-left">
 
-                <tbody>
-                <tr th:each="ut:${userTasks}">
+                            <thead class="table-success">
+                            <tr>
+                                <th>Task name</th>
+                                <th>Start date</th>
+                                <th>End date</th>
+                                <th>Completed</th>
+                            </tr>
+                            </thead>
 
-                    <td th:text="${ut.name}"></td>
-                    <td th:text="${ut.description}"></td>
+                            <tbody>
+                            <tr th:each="ut:${userTasks}">
 
-                    <td th:text="${#strings.substring(ut.startDate+' ',8,10)}
+                                <td th:text="${ut.name}"></td>
+
+                                <td th:text="${#strings.substring(ut.startDate+' ',8,10)}
                             +'-'+${#strings.substring(ut.startDate,5,7)}
                             +'-'+${#strings.substring(ut.startDate,0,4)}"></td>
-                    <td th:text="${#strings.substring(ut.endDate+' ',8,10)}
+                                <td th:text="${#strings.substring(ut.endDate+' ',8,10)}
                             +'-'+${#strings.substring(ut.endDate,5,7)}
                             +'-'+${#strings.substring(ut.endDate,0,4)}"></td>
 
-                    <td th:id="row+${ut.id}">
-                        <a th:href="${ut.completed} ? ${'/task/markUndone/' + ut.id} : ${'/task/markDone/' + ut.id}"
-                           th:classappend="${ut.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
-                           th:text="${ut.completed} ? 'completed' : 'in progress'"></a>
-                    </td>
-                </tr>
-                </tbody>
+                                <td th:text="${ut.completed} ? 'completed' : 'in progress'"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="col">
+                    <div class="card">
+                        <h4 class="card-header">Free tasks, available for assignment</h4>
 
-                <thead>
-                <tr>
-                    <td colspan="5" class="my-3">&nbsp;</td>
-                </tr>
-                </thead>
+                        <table class="my-tab table table-hover text-left">
 
-                <thead class="thead-white" th:unless="${freeTasks.size()==0}">
-                <tr>
-                    <th colspan="5">
-                        <h4 th:text="'Free tasks (you can assign them to '+${user.name}+')'"></h4>
-                    </th>
-                </tr>
-                </thead>
-                <thead class="table-secondary" th:unless="${freeTasks.size()==0}">
-                <tr>
-                    <th>Task name</th>
-                    <th>Description</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Assign task</th>
-                </tr>
-                </thead>
-                <tbody>
+                            <thead class="table-secondary">
+                            <tr>
+                                <th>Task name</th>
+                                <th>Start date</th>
+                                <th>End date</th>
+                                <th>Assign</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                <tr th:each="ft:${freeTasks}">
-                    <td th:text="${ft.name}"></td>
-                    <td th:text="${ft.description}"></td>
+                            <tr th:each="ft:${freeTasks}" th:unless="${freeTasks.size()==0}">
+                                <td th:text="${ft.name}"></td>
 
-                    <td th:text="${#strings.substring(ft.startDate+' ',8,10)}
+                                <td th:text="${#strings.substring(ft.startDate+' ',8,10)}
                             +'-'+${#strings.substring(ft.startDate,5,7)}
                             +'-'+${#strings.substring(ft.startDate,0,4)}"></td>
-                    <td th:text="${#strings.substring(ft.endDate+' ',8,10)}
+                                <td th:text="${#strings.substring(ft.endDate+' ',8,10)}
                             +'-'+${#strings.substring(ft.endDate,5,7)}
                             +'-'+${#strings.substring(ft.endDate,0,4)}"></td>
 
-                    <td><a th:href="@{'/assign/'+${user.email}+'/'+ ${ft.id}}" class="btn btn-dark btn-sm">Assign</a></td>
-                </tr>
-                </tbody>
-            </table>
+                                <td><a th:href="@{'/assign/'+${user.email}+'/'+ ${ft.id}}"
+                                       class="btn btn-info btn-sm">Assign task</a>
+                                </td>
+                            </tr>
+                            <tr th:if="${freeTasks.size()==0}">
+                                <td colspan="5">There are no tasks to assign</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+            </div>
         </div>
     </div>
 </main>
