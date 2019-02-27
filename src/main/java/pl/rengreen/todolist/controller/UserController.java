@@ -45,7 +45,7 @@ public class UserController {
         return "views/assignTasksForm";
     }
 
-    @GetMapping("/assign/{email}/{id}")
+    @GetMapping("user/assign/{email}/{id}")
     public String assignTask(@PathVariable String email, @PathVariable Long id, Model model) {
         Task selectedTask=taskService.getTaskById(id);
         taskService.assignUserToTask(selectedTask, userService.getUserByEmail(email));

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <title>Tasks List - Todo App</title>
+</head>
+
+<body>
+
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('users')"></th:block> /*/-->
+</header>
+
+<main class="container">
+    <div class="card mb-3">
+
+        <h3 class="card-header">
+            <span>Choose  owner for task: </span>
+            <span class="text text-success" th:text="${task.name}"></span>
+        </h3>
+
+        <div class="card card-body">
+            <table class="table table-hover text-left">
+
+                <thead class="table-info">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Tasks completed</th>
+                    <th>Tasks in progress</th>
+                    <th>Assign</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}" >
+
+
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
+
+                    <td class="replace_cell"  th:if="${user.tasks.size()!=0}">
+                        <div th:each="t : ${user.tasks}" th:text="${t.completed} ? ${t.name}"></div>
+                    </td>
+                    <td class="text-danger" th:unless="${user.tasks.size()!=0}">no tasks</td>
+
+                    <td class="replace_cell" th:if="${user.tasks.size()!=0}">
+                        <div th:each="t : ${user.tasks}" th:text="${!t.completed} ? ${t.name}"></div>
+                    </td>
+                    <td class="text-danger" th:unless="${user.tasks.size()!=0}">no tasks</td>
+
+                    <td><a th:href="@{'/task/assign/'+${user.email}+'/'+${task.id}}" class="btn btn-primary btn-sm">Assign
+                        as owner</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
+<script>
+    if ($('.replace_cell').html() === '') {
+        $('.replace_cell').html('no tasks');
+    }
+</script>
+
+</body>
+</html>

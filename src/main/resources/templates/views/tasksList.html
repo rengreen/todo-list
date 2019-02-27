@@ -9,145 +9,153 @@
 
 <body>
 
-    <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('tasks')"></th:block> /*/-->
-    </header>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('tasks')"></th:block> /*/-->
+</header>
 
-    <main class="container">
-        <div class="card mb-3">
+<main class="container">
+    <div class="card mb-3">
 
-            <h3 class="card-header">Tasks list
-                <span><a class="btn btn-outline-success btn-lg float-right" th:href="@{/task/new}">Create new task</a></span>
-            </h3>
+        <h3 class="card-header">Tasks list
+            <span><a class="btn btn-outline-success btn-lg float-right"
+                     th:href="@{/task/new}">Create new task</a></span>
+        </h3>
 
-            <div class="card card-body">
-                <table class="my-tab table table-striped table-hover text-left">
+        <div class="card card-body">
+            <table class="my-tab table table-hover text-center">
 
-                    <thead class="table-success">
-                    <tr>
-                        <th>Task name</th>
-                        <th>Task details</th>
-                        <th>Owner</th>
-                        <th>Start date</th>
-                        <th>End date</th>
-                        <th>Completed</th>
-                        <th colspan="2">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
-                        <td th:text="${t.name}"></td>
-
+                <thead class="table-success">
+                <tr>
+                    <th class="text-left">Task</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Task owner</th>
+                    <th>Mark completed</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
+                    <td  class="text-left">
+                        <span th:text="${t.name}"></span>
                         <!--details button-->
-                        <td><a data-toggle="modal" data-target="#modal-details"
-                               th:attr="data-target='#modal-details'+${t.id}"
-                               th:href="${'/task/' + t.id}"
-                               class="btn btn-outline-info btn-sm">Details</a></td>
+                        <span><a data-toggle="modal" data-target="#modal-details"
+                                 th:attr="data-target='#modal-details'+${t.id}"
+                                 th:href="${'/task/' + t.id}"
+                                 class="btn btn-outline-primary btn-sm ml-3">Details</a></span>
+                    </td>
 
-                        <td class="text-center" th:if="${t.user!=null}"><div th:text="${t.user.getName()}"></div></td>
-                        <td class="text-center" th:unless="${t.user!=null}">
-                            <a th:href="${'/task/' + t.id}" class="btn btn-outline-primary btn-sm">Add owner</a></td>
-
-                        <td th:text="${#strings.substring(t.startDate+' ',8,10)}
+                    <td th:text="${#strings.substring(t.startDate+' ',8,10)}
                             +'-'+${#strings.substring(t.startDate,5,7)}
                             +'-'+${#strings.substring(t.startDate,0,4)}"></td>
-                        <td th:text="${#strings.substring(t.endDate+' ',8,10)}
+                    <td th:text="${#strings.substring(t.endDate+' ',8,10)}
                             +'-'+${#strings.substring(t.endDate,5,7)}
                             +'-'+${#strings.substring(t.endDate,0,4)}"></td>
 
-                        <td th:id="row+${t.id}">
-                            <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"
-                               th:classappend="${t.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
-                               th:text="${t.completed} ? 'completed' : 'in progress'"></a>
-                        </td>
+                    <td th:if="${t.user!=null}">
+                        <div th:text="${t.user.getName()}"></div>
+                    </td>
 
-                        <!--edit button-->
-                        <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
+                    <td class="text-center" th:unless="${t.user!=null}">
+                        <a th:href="${'/task/assignUser/' + t.id}" class="btn btn-light btn-sm">Choose
+                            owner</a></td>
 
-                        <!--delete button-->
-                        <td>
-                            <a data-toggle="modal" data-target="#modal-delete"
-                               th:attr="data-target='#modal-delete'+${t.id}"
-                               th:href="${'/task/delete/' + t.id}"
-                               class="btn btn-outline-danger btn-sm">Delete
-                            </a>
-                        </td>
+                    <td th:id="row+${t.id}">
+                        <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"
+                           th:classappend="${t.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
+                           th:text="${t.completed} ? 'completed' : 'in progress'"></a>
+                    </td>
 
-                        <!--modal with task details-->
-                        <div class="modal" th:id="modal-details+${t.id}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 th:text="${t.name}" class="modal-title text-info"></h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p th:text="${'Description: '+t.description}"></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                                    </div>
+                    <!--edit button-->
+                    <td><a th:href="${'/task/edit/' + t.id}" class="btn btn-outline-success btn-sm">Edit</a></td>
+
+                    <!--delete button-->
+                    <td>
+                        <a data-toggle="modal" data-target="#modal-delete"
+                           th:attr="data-target='#modal-delete'+${t.id}"
+                           th:href="${'/task/delete/' + t.id}"
+                           class="btn btn-outline-danger btn-sm">Delete
+                        </a>
+                    </td>
+
+                    <!--modal with task details-->
+                    <div class="modal" th:id="modal-details+${t.id}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 th:text="${t.name}" class="modal-title text-info"></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="${'Description: '+t.description}"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <!--end of modal with task details-->
+                    </div>
+                    <!--end of modal with task details-->
 
-                        <!--modal for delete confirmation-->
-                        <div class="modal" th:id="modal-delete+${t.id }">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title text-danger">Delete Confirmation</h3>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p th:text="${'Are you sure you want to delete task: &quot '+t.name+'&quot?'}"></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                                        <a th:href="${'/task/delete/' + t.id}">
-                                            <span class="btn btn-danger">Delete</span></a>
-                                    </div>
+                    <!--modal for delete confirmation-->
+                    <div class="modal" th:id="modal-delete+${t.id }">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-danger">Delete Confirmation</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="${'Are you sure you want to delete task: &quot '+t.name+'&quot?'}"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                        Cancel
+                                    </button>
+                                    <a th:href="${'/task/delete/' + t.id}">
+                                        <span class="btn btn-danger">Delete</span></a>
                                 </div>
                             </div>
                         </div>
-                        <!--end of modal for delete confirmation-->
+                    </div>
+                    <!--end of modal for delete confirmation-->
 
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </main>
+    </div>
+</main>
 
-    <footer class="footer">
-        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
-    </footer>
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
 
-    <!--remain scroll position after redirect-->
-    <script>
-        $(window).scroll(function() {
-            sessionStorage.scrollTop = $(this).scrollTop();
-        });
+<!--remain scroll position after redirect-->
+<script>
+    $(window).scroll(function () {
+        sessionStorage.scrollTop = $(this).scrollTop();
+    });
 
-        $(document).ready(function() {
-            if (sessionStorage.scrollTop !== "undefined") {
-                $(window).scrollTop(sessionStorage.scrollTop);
-            }
-        });
-    </script>
+    $(document).ready(function () {
+        if (sessionStorage.scrollTop !== "undefined") {
+            $(window).scrollTop(sessionStorage.scrollTop);
+        }
+    });
+</script>
 
-    <!--modal for confirmation of delete-->
-    <script>
-        $('#modal').on('show.bs.modal', function (e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        });
+<!--modal for confirmation of delete-->
+<script>
+    $('#modal').on('show.bs.modal', function (e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
 
-    </script>
+</script>
 
 </body>
 </html>

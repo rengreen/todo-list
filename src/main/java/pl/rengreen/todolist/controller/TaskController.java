@@ -83,6 +83,23 @@ public class TaskController {
         taskService.setTaskNotCompleted(id);
         return "redirect:/tasks";
     }
+
+    @GetMapping("task/assignUser/{id}")
+    public  String showAssignTaskForm(@PathVariable Long id, Model model) {
+
+        model.addAttribute("task", taskService.getTaskById(id));
+        model.addAttribute("users", userService.findAll());
+
+        return "views/assignUserForm";
+    }
+
+    @GetMapping("task/assign/{email}/{id}")
+    public String assignTask(@PathVariable String email, @PathVariable Long id, Model model) {
+        Task selectedTask=taskService.getTaskById(id);
+        taskService.assignUserToTask(selectedTask, userService.getUserByEmail(email));
+
+        return "redirect:/tasks";
+    }
 }
 
 

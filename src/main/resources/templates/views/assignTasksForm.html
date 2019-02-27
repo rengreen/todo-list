@@ -26,7 +26,7 @@
                 <div class="col">
                     <div class="card">
                         <h4 class="card-header">
-                            <span>Tasks assigned to </span>
+                            <span>Tasks actually assigned to </span>
                             <span class="text text-success" th:text="${user.name}"></span>
                         </h4>
                         <table class="my-tab table table-hover text-left">
@@ -85,7 +85,7 @@
                             +'-'+${#strings.substring(ft.endDate,5,7)}
                             +'-'+${#strings.substring(ft.endDate,0,4)}"></td>
 
-                                <td><a th:href="@{'/assign/'+${user.email}+'/'+ ${ft.id}}"
+                                <td><a th:href="@{'/user/assign/'+${user.email}+'/'+ ${ft.id}}"
                                        class="btn btn-info btn-sm">Assign task</a>
                                 </td>
                             </tr>
