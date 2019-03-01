@@ -35,7 +35,13 @@
                         <td th:text="${user.name}"></td>
                         <td th:text="${user.email}"></td>
 
-                        <td th:if="${user.tasks.size()!=0}"><div th:each="t : ${user.tasks}" th:text="${t.name}"></div></td>
+                        <td th:if="${user.tasks.size()!=0}">
+                            <div th:each="t : ${user.tasks}"
+                                 th:text="${t.completed} ? ${t.name} : ${t.name}"
+                                 th:style="${t.completed} ? 'text-decoration: line-through'"
+                            ></div>
+                        </td>
+                        
                         <td th:unless="${user.tasks.size()!=0}">no task</td>
 
                         <td><a th:href="@{'/user/assignTasks/'+${user.email}}" class="btn btn-primary btn-sm">Assign tasks</a></td>
