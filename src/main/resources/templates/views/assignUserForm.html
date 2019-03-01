@@ -10,7 +10,7 @@
 <body>
 
 <header>
-    <!--/*/ <th:block th:include="fragments/header :: header('users')"></th:block> /*/-->
+    <!--/*/ <th:block th:include="fragments/header :: header('tasks')"></th:block> /*/-->
 </header>
 
 <main class="container">
@@ -28,11 +28,10 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Tasks completed</th>
-                    <th>Tasks in progress</th>
-                    <th>Assign</th>
-
-
+                    <th class="text-center">Tasks completed</th>
+                    <th class="text-center">Tasks in progress</th>
+                    <th>Tasks in progress (details)</th>
+                    <th>Choose owner</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,18 +41,35 @@
                     <td th:text="${user.name}"></td>
                     <td th:text="${user.email}"></td>
 
-                    <td class="replace_cell"  th:if="${user.tasks.size()!=0}">
-                        <div th:each="t : ${user.tasks}" th:text="${t.completed} ? ${t.name}"></div>
+                    <td class="text-center" th:if="${user.tasks.size()!=0}">
+                        <ul class="my-replace-by-number pl-0">
+                            <li th:each="t : ${user.tasks}" th:if="${t.completed}">
+                                <span th:text="${t.name}"></span>
+                            </li>
+                        </ul>
                     </td>
-                    <td class="text-danger" th:unless="${user.tasks.size()!=0}">no tasks</td>
+                    <td class="text-center" th:unless="${user.tasks.size()!=0}">0</td>
 
-                    <td class="replace_cell" th:if="${user.tasks.size()!=0}">
-                        <div th:each="t : ${user.tasks}" th:text="${!t.completed} ? ${t.name}"></div>
+                    <td class="text-center" th:if="${user.tasks.size()!=0}">
+                        <ul class="my-replace-by-number pl-0">
+                            <li th:each="t : ${user.tasks}" th:if="${!t.completed}">
+                                <span th:text="${t.name}"></span>
+                            </li>
+                        </ul>
                     </td>
-                    <td class="text-danger" th:unless="${user.tasks.size()!=0}">no tasks</td>
+                    <td class="text-center" th:unless="${user.tasks.size()!=0}">0</td>
 
-                    <td><a th:href="@{'/task/assign/'+${user.email}+'/'+${task.id}}" class="btn btn-primary btn-sm">Assign
-                        as owner</a></td>
+                    <td th:if="${user.tasks.size()!=0}">
+                        <ul class=" list-unstyled pl-0">
+                            <li th:each="t : ${user.tasks}" th:if="${!t.completed}">
+                                <span th:text="${t.name}"></span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td th:unless="${user.tasks.size()!=0}"></td>
+
+                    <td class="text-center"><a th:href="@{'/task/assign/'+${user.email}+'/'+${task.id}}"
+                           class="btn btn-primary btn-sm">Choose</a></td>
 
                 </tr>
                 </tbody>
@@ -67,9 +83,16 @@
 </footer>
 
 <script>
-    if ($('.replace_cell').html() === '') {
-        $('.replace_cell').html('no tasks');
-    }
+    $(function() {
+        var count = 0;
+        $('ul').each(function(){
+            if(count != 0){
+                var len = $(this).find('li').length;
+                $(this).parent().find('.my-replace-by-number').html(len);
+            }
+            count++;
+        })
+    });
 </script>
 
 </body>
