@@ -69,7 +69,7 @@
                     <td th:unless="${user.tasks.size()!=0}"></td>
 
                     <td class="text-center"><a th:href="@{'/task/assign/'+${user.email}+'/'+${task.id}}"
-                           class="btn btn-primary btn-sm">Choose</a></td>
+                                               class="btn btn-primary btn-sm">Choose</a></td>
 
                 </tr>
                 </tbody>
@@ -86,7 +86,7 @@
     $(function() {
         var count = 0;
         $('ul').each(function(){
-            if(count != 0){
+            if(count !== 0){
                 var len = $(this).find('li').length;
                 $(this).parent().find('.my-replace-by-number').html(len);
             }

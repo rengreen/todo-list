@@ -9,54 +9,54 @@
 
 <body>
 
-    <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('users')"></th:block> /*/-->
-    </header>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('users')"></th:block> /*/-->
+</header>
 
-    <main class="container">
-        <div class="card mb-3">
+<main class="container">
+    <div class="card mb-3">
 
-            <h3 class="card-header">Users list</h3>
+        <h3 class="card-header">Users list</h3>
 
-            <div class="card card-body">
-                <table class="table table-striped table-hover text-left">
+        <div class="card card-body">
+            <table class="table table-hover text-left">
 
-                    <thead class="table-info">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Assigned tasks</th>
+                <thead class="table-info">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Assigned tasks</th>
 
-                        <th colspan="4">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user:${users}">
-                        <td th:text="${user.name}"></td>
-                        <td th:text="${user.email}"></td>
+                    <th colspan="4">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}">
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
 
-                        <td th:if="${user.tasks.size()!=0}">
-                            <div th:each="t : ${user.tasks}"
-                                 th:text="${t.completed} ? ${t.name} : ${t.name}"
-                                 th:style="${t.completed} ? 'text-decoration: line-through'"
-                            ></div>
-                        </td>
-                        
-                        <td th:unless="${user.tasks.size()!=0}">no task</td>
+                    <td th:if="${user.tasks.size()!=0}">
+                        <div th:each="t : ${user.tasks}"
+                             th:text="${t.completed} ? ${t.name} : ${t.name}"
+                             th:style="${t.completed} ? 'text-decoration: line-through'"
+                        ></div>
+                    </td>
+                    <td th:unless="${user.tasks.size()!=0}">no task</td>
 
-                        <td><a th:href="@{'/user/assignTasks/'+${user.email}}" class="btn btn-primary btn-sm">Assign tasks</a></td>
-                        <td ><a th:href="${'/user/' + user.email}" class="btn btn-outline-info btn-sm">User profile</a></td>
-                        <td ><a th:href="${'/user/delete/' + user.email}" class="btn btn-outline-danger btn-sm">Delete user</a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <td><a th:href="@{'/user/assignTasks/'+${user.email}}"
+                           class="btn btn-primary btn-sm">Assign more tasks</a></td>
+                    <td><a th:href="${'/user/delete/' + user.email}"
+                           class="btn btn-outline-danger btn-sm">Delete user</a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </main>
+    </div>
+</main>
 
-    <footer class="footer">
-        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
-    </footer>
+<footer class="footer">
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
 
 </body>
 </html>

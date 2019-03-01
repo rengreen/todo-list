@@ -10,7 +10,7 @@
 <body>
 
 <header>
-    <!--/*/ <th:block th:include="fragments/header :: header('register')"></th:block> /*/-->
+    <!--/*/ <th:block th:include="fragments/header :: header('users')"></th:block> /*/-->
 </header>
 
 <main class="container">
@@ -70,7 +70,7 @@
                                 <th>Task name</th>
                                 <th>Start date</th>
                                 <th>End date</th>
-                                <th>Assign</th>
+                                <th>Assign task</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -86,7 +86,7 @@
                             +'-'+${#strings.substring(ft.endDate,0,4)}"></td>
 
                                 <td><a th:href="@{'/user/assign/'+${user.email}+'/'+ ${ft.id}}"
-                                       class="btn btn-info btn-sm">Assign task</a>
+                                       class="btn btn-info btn-sm">Assign this task</a>
                                 </td>
                             </tr>
                             <tr th:if="${freeTasks.size()==0}">

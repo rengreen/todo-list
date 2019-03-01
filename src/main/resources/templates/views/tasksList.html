@@ -26,7 +26,8 @@
 
                 <thead class="table-success">
                 <tr>
-                    <th class="text-left">Task</th>
+                    <th class="text-left">Task name</th>
+                    <th>Description</th>
                     <th>Start date</th>
                     <th>End date</th>
                     <th>Task owner</th>
@@ -36,13 +37,14 @@
                 </thead>
                 <tbody>
                 <tr th:each="i : ${#numbers.sequence(tasks.size() - 1, 0, -1)}" th:with="t=${tasks[i]}">
-                    <td  class="text-left">
-                        <span th:text="${t.name}"></span>
-                        <!--details button-->
-                        <span><a data-toggle="modal" data-target="#modal-details"
-                                 th:attr="data-target='#modal-details'+${t.id}"
-                                 th:href="${'/task/' + t.id}"
-                                 class="btn btn-outline-primary btn-sm ml-3">Details</a></span>
+                    <td class="text-left" th:text="${t.name}"></td>
+
+                    <!--details button-->
+                    <td>
+                        <a data-toggle="modal" data-target="#modal-details"
+                           th:attr="data-target='#modal-details'+${t.id}"
+                           th:href="${'/task/' + t.id}"
+                           class="btn btn-outline-info btn-sm">Show</a>
                     </td>
 
                     <td th:text="${#strings.substring(t.startDate+' ',8,10)}
@@ -57,8 +59,8 @@
                     </td>
 
                     <td class="text-center" th:unless="${t.user!=null}">
-                        <a th:href="${'/task/assignUser/' + t.id}" class="btn btn-light btn-sm">Choose
-                            owner</a></td>
+                        <a th:href="${'/task/assignUser/' + t.id}"
+                           class="btn btn-outline-primary btn-sm">Choose owner</a></td>
 
                     <td th:id="row+${t.id}">
                         <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"
