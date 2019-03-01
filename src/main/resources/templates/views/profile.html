@@ -49,7 +49,7 @@
 
                     <td th:id="row+${t.id}">
                         <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"
-                           th:classappend="${t.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
+                           th:classappend="${t.completed} ? 'text-success' : 'text-danger'"
                            th:text="${t.completed} ? 'completed' : 'in progress'"></a>
                     </td>
 
