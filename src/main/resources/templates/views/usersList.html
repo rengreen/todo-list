@@ -45,8 +45,11 @@
 
                     <td><a th:href="@{'/user/assignTasks/'+${user.email}}"
                            class="btn btn-primary btn-sm">Assign more tasks</a></td>
-                    <td><a th:href="${'/user/delete/' + user.email}"
-                           class="btn btn-outline-danger btn-sm">Delete user</a></td>
+                    <td><span data-toggle="tooltip" data-placement="right"
+                              title="User deletion is currently inactive">
+                        <a th:href="${'/user/delete/' + user.email}"
+                           class="btn btn-outline-danger btn-sm disabled">Delete user</a>
+                    </span></td>
                 </tr>
                 </tbody>
             </table>
