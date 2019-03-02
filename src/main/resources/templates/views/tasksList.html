@@ -62,9 +62,10 @@
                         <a th:href="${'/task/assignUser/' + t.id}"
                            class="btn btn-outline-primary btn-sm">Choose owner</a></td>
 
-                    <td th:id="row+${t.id}">
+                    <td>
                         <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"
-                           th:classappend="${t.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
+                           th:class="${t.completed} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'"
+                           th:classappend="${t.user==null} ? 'disabled'"
                            th:text="${t.completed} ? 'completed' : 'in progress'"></a>
                     </td>
 
