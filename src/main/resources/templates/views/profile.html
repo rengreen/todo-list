@@ -52,7 +52,10 @@
                            th:classappend="${t.completed} ? 'text-success' : 'text-danger'"
                            th:text="${t.completed} ? 'completed' : 'in progress'"></a>
                     </td>
+                </tr>
 
+                <tr th:if="${tasks.size()==0}">
+                    <td colspan="5" th:text="${'There are no tasks assigned to '+ user.name}"></td>
                 </tr>
                 </tbody>
             </table>
