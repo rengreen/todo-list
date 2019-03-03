@@ -12,4 +12,7 @@ Simple Todo App according to https://github.com/1024kb-pl/StowarzyszenieNaukiJav
 - Display all tasks
 
 **Started with Spring Initializr** https://start.spring.io/
-including: Web, Security, JPA, H2, MySQL, Thymeleaf, DevTools. 
+including: Web, Security, JPA, H2, MySQL, Thymeleaf, DevTools.  
+  
+---  
+Commit emojis thanks to: https://gitmoji.carloscuesta.me/  
