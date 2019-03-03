@@ -25,7 +25,7 @@ public class TaskController {
     }
 
     @Autowired
-    public void setTaskRepository(TaskService taskService) {
+    public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
     }
 

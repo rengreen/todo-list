@@ -23,7 +23,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private final Logger logger = LoggerFactory.getLogger(DataLoader.class);
 
     @Autowired
-    public void setRoleRepository(RoleService roleService) {
+    public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
     }
     @Autowired
@@ -31,7 +31,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         this.userService = userService;
     }
     @Autowired
-    public void setTaskRepository(TaskService taskService) {
+    public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
     }
 

@@ -22,7 +22,7 @@ public class ProfileController {
     }
 
     @Autowired
-    public void setTaskRepository(TaskService taskService) {
+    public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
     }
 
