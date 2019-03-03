@@ -2,6 +2,7 @@ package pl.rengreen.todolist.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Task {
@@ -11,6 +12,8 @@ public class Task {
     @NotEmpty
     private String name;
     @NotEmpty
+    @Column(length = 1200)
+    @Size(max=1200)
     private String description;
     @NotEmpty
     private String startDate;
