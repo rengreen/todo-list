@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.rengreen.todolist.domain.Role;
-import pl.rengreen.todolist.domain.Task;
 import pl.rengreen.todolist.domain.User;
 import pl.rengreen.todolist.repository.UserRepository;
 
@@ -13,8 +12,12 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void createUser(User user) {

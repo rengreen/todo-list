@@ -7,8 +7,12 @@ import pl.rengreen.todolist.repository.RoleRepository;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-    @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    public void setRoleRepository(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @Override
     public Role saveRole(Role role) {
