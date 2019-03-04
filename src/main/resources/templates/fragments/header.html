@@ -52,7 +52,9 @@
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-lg-0" th:action="@{logout}" method="post">
+            <form class="form-inline my-2 my-lg-0"
+                  th:action="@{logout}" method="post"
+                  sec:authorize="isAuthenticated()">
                 <button class="btn btn-secondary my-2 my-sm-0 mx-2" type="submit">Log out</button>
             </form>
         </div>
