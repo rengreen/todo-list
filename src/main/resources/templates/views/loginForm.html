@@ -23,32 +23,40 @@
                 <div class="alert alert-danger" th:if="${param.error}">
                     <h2>Invalid Email or Password</h2>
                 </div>
-            <form th:action="@{/login}" method="post">
+                <form th:action="@{/login}" method="post">
 
-                <div class="form-group">
-                    <label for="email" class="form-control-label">Email</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-at"></i></span>
-                        </div >
-                    <input type="text" class="form-control"
-                           id="email" name="username"/>
-                    </div >
-                </div>
+                    <div class="form-group">
+                        <label for="email" class="form-control-label">Email</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-at"></i></span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   id="email" name="username"/>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="password" class="form-control-label">Password</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        </div >
-                    <input type="password" class="form-control"
-                           id="password" name="password"/>
-                    </div >
-                </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock show-password-toggle"></i>
+                                </span>
+                            </div>
+                            <input type="password" class="form-control password"
+                                   id="password" name="password"/>
+                            <div class="input-group-append ">
+                                <span class="input-group-text">
+                                    <i class="far fa-eye show-password"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
 
-                <input type="submit" value="Submit" class="btn btn-primary"/>
-            </form>
+                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                </form>
+            </div>
         </div>
     </div>
 </main>
@@ -57,5 +65,12 @@
     <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </footer>
 
+<script>
+    $('.show-password').hover(function () {
+        $('.password').attr('type', 'text');
+    }, function () {
+        $('.password').attr('type', 'password');
+    });
+</script>
 </body>
 </html>
