@@ -43,10 +43,17 @@
                     <label for="password" class="form-control-label">Password</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <span class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                            </span>
                         </div >
-                    <input type="password" class="form-control"
+                    <input type="password" class="form-control password"
                            th:field="*{password}" id="password"/>
+                        <div class="input-group-append ">
+                                <span class="input-group-text">
+                                    <i class="far fa-eye show-password"></i>
+                                </span>
+                        </div>
                     </div >
                     <div class="text text-danger"
                          th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
@@ -75,6 +82,14 @@
 <footer class="footer">
     <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </footer>
+
+<script>
+    $('.show-password').hover(function () {
+        $('.password').attr('type', 'text');
+    }, function () {
+        $('.password').attr('type', 'password');
+    });
+</script>
 
 </body>
 </html>
