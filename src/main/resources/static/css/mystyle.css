@@ -15,3 +15,7 @@ main.container {
   background-color:white;
   text-align: center;
 }
+
+.form-control:focus {
+  box-shadow: none;
+}
