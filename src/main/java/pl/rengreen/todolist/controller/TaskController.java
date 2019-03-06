@@ -31,7 +31,7 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String listTasks(Model model) {
-        model.addAttribute("tasks", taskService.findAll());
+        model.addAttribute("tasks", taskService.findAllByOrderByEndDateDesc());
         model.addAttribute("users", userService.findAll());
         return "views/tasksList";
     }
@@ -87,7 +87,7 @@ public class TaskController {
     @GetMapping("task/assignUser/{id}")
     public  String showAssignTaskForm(@PathVariable Long id, Model model) {
 
-        model.addAttribute("task", taskService.getTaskById(id));
+        model.addAttribute("tasks", taskService.findAll());
         model.addAttribute("users", userService.findAll());
 
         return "views/assignUserForm";

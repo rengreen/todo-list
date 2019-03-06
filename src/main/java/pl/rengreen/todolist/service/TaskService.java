@@ -17,8 +17,8 @@ public interface TaskService {
     void setTaskNotCompleted(Long id);
 
     List<Task> findTasksByUser(User user);
-
     void assignUserToTask(Task task, User user);
-
     List<Task>  findFreeTasks();
+
+    List<Task> findAllByOrderByEndDateDesc();
 }
