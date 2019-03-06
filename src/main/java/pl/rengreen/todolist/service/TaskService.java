@@ -21,4 +21,5 @@ public interface TaskService {
     List<Task>  findFreeTasks();
 
     List<Task> findAllByOrderByEndDateDesc();
+    List<Task> findTasksByUserOrderByEndDateDesc(User user);
 }

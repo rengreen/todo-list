@@ -91,4 +91,9 @@ public class TaskServiceImpl implements TaskService{
     public List<Task> findAllByOrderByEndDateDesc() {
         return taskRepository.findAllByOrderByEndDateDesc();
     }
+
+    @Override
+    public List<Task> findTasksByUserOrderByEndDateDesc(User user) {
+        return taskRepository.findTasksByUserOrderByEndDateDesc(user);
+    }
 }

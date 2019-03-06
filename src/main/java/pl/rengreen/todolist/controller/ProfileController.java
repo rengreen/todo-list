@@ -31,7 +31,7 @@ public class ProfileController {
 
         String email=principal.getName();
         User user = userService.getUserByEmail(email);
-        model.addAttribute("tasks", taskService.findTasksByUser(user));
+        model.addAttribute("tasks", taskService.findTasksByUserOrderByEndDateDesc(user));
         model.addAttribute("user", user);
 
         return "views/profile";

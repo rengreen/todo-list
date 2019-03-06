@@ -9,4 +9,5 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByUser(User user);
     List<Task> findAllByOrderByEndDateDesc();
+    List<Task> findTasksByUserOrderByEndDateDesc(User user);
 }
