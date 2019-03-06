@@ -24,6 +24,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private TaskService taskService;
     private final Logger logger = LoggerFactory.getLogger(DataLoader.class);
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    LocalDate startDate;
+    LocalDate endDate;
 
     @Autowired
     public void setRoleService(RoleService roleService) {
@@ -95,8 +97,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("First meeting");
         task.setDescription("Setup first meetings with client");
-        LocalDate startDate = LocalDate.parse("01-04-2019", formatter);
-        LocalDate endDate = LocalDate.parse("02-04-2019", formatter);
+        startDate = LocalDate.parse("01-04-2019", formatter);
+        endDate = LocalDate.parse("02-04-2019", formatter);
         task.setStartDate(startDate);
         task.setEndDate(endDate);
         task.setCompleted(true);
@@ -104,13 +106,15 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
-        /*
+
         //2
         task = new Task();
         task.setName("Briefing document");
         task.setDescription("Define and collect briefing document from client");
-        task.setStartDate("2019-03-02");
-        task.setEndDate("2019-03-03");
+        startDate = LocalDate.parse("02-04-2019", formatter);
+        endDate = LocalDate.parse("03-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(true);
         task.setUser(userService.getUserByEmail("ann@supermail.com"));
         taskService.createTask(task);
@@ -120,8 +124,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Project questionnaire");
         task.setDescription("Define and send project questionnaire to the client and wait for the client’s response. Finalize project questionnaire from client");
-        task.setStartDate("2019-03-03");
-        task.setEndDate("2019-03-04");
+        startDate = LocalDate.parse("03-04-2019", formatter);
+        endDate = LocalDate.parse("04-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(true);
         task.setUser(userService.getUserByEmail("ralf@bestmail.com"));
         taskService.createTask(task);
@@ -131,8 +137,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Client’s company research");
         task.setDescription("Research client’s company to understand their brand, the way they communicate, their demographics, target audience");
-        task.setStartDate("2019-03-04");
-        task.setEndDate("2019-03-05");
+        startDate = LocalDate.parse("04-04-2019", formatter);
+        endDate = LocalDate.parse("05-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(true);
         task.setUser(userService.getUserByEmail("kate@quickmail.com"));
         taskService.createTask(task);
@@ -142,8 +150,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Client’s industry research");
         task.setDescription("Research client’s industry to find ways of communicating specifically to the industry, strengths and weaknesses, and trends");
-        task.setStartDate("2019-03-05");
-        task.setEndDate("2019-03-06");
+        startDate = LocalDate.parse("05-04-2019", formatter);
+        endDate = LocalDate.parse("06-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(false);
         task.setUser(userService.getUserByEmail("kate@quickmail.com"));
         taskService.createTask(task);
@@ -153,8 +163,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Valuation of development effort");
         task.setDescription("Get quotation for development effort for project");
-        task.setStartDate("2019-03-06");
-        task.setEndDate("2019-03-07");
+        startDate = LocalDate.parse("06-04-2019", formatter);
+        endDate = LocalDate.parse("07-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(false);
         task.setUser(userService.getUserByEmail("mark@mail.com"));
         taskService.createTask(task);
@@ -164,8 +176,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Valuation of designers work");
         task.setDescription("Get quotation for design, estimate design work with designers");
-        task.setStartDate("2019-03-07");
-        task.setEndDate("2019-03-08");
+        startDate = LocalDate.parse("07-04-2019", formatter);
+        endDate = LocalDate.parse("08-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(false);
         task.setUser(userService.getUserByEmail("mark@mail.com"));
         taskService.createTask(task);
@@ -175,8 +189,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Valuation of copywriters work");
         task.setDescription("Get quotation for copy/content, estimate work with copywriters");
-        task.setStartDate("2019-03-08");
-        task.setEndDate("2019-03-09");
+        startDate = LocalDate.parse("08-04-2019", formatter);
+        endDate = LocalDate.parse("09-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(false);
         task.setUser(userService.getUserByEmail("ann@supermail.com"));
         taskService.createTask(task);
@@ -186,8 +202,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Valuation of photos/video");
         task.setDescription("Get quotation for photography/video production or estimate effort involved");
-        task.setStartDate("2019-03-09");
-        task.setEndDate("2019-03-10");
+        startDate = LocalDate.parse("09-04-2019", formatter);
+        endDate = LocalDate.parse("10-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(false);
         taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' with no user");
@@ -196,13 +214,15 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("Valuation of hosting/domain");
         task.setDescription("Get quotation for Hosting/Domain, particularly if specialized hosting is involved");
-        task.setStartDate("2019-03-10");
-        task.setEndDate("2019-03-11");
+        startDate = LocalDate.parse("10-04-2019", formatter);
+        endDate = LocalDate.parse("11-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(false);
         taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' with no user");
 
-        */
+
     }
 }
 
