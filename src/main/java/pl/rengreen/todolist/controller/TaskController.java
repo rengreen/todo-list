@@ -31,7 +31,7 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String listTasks(Model model) {
-        model.addAttribute("tasks", taskService.findAllByOrderByEndDateDesc());
+        model.addAttribute("tasks", taskService.findAllByOrderByEndDateAsc());
         model.addAttribute("users", userService.findAll());
         return "views/tasksList";
     }

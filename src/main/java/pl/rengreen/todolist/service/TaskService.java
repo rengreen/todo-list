@@ -20,6 +20,6 @@ public interface TaskService {
     void assignUserToTask(Task task, User user);
     List<Task>  findFreeTasks();
 
-    List<Task> findAllByOrderByEndDateDesc();
-    List<Task> findTasksByUserOrderByEndDateDesc(User user);
+    List<Task> findAllByOrderByEndDateAsc();
+    List<Task> findTasksByUserOrderByEndDateAsc(User user);
 }
