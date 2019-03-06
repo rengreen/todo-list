@@ -1,8 +1,13 @@
 package pl.rengreen.todolist.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Task {
@@ -15,10 +20,12 @@ public class Task {
     @Column(length = 1200)
     @Size(max=1200)
     private String description;
-    @NotEmpty
-    private String startDate;
-    @NotEmpty
-    private String endDate;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
     private boolean isCompleted;
     @ManyToOne
     @JoinColumn(name = "USER_EMAIL")
@@ -27,7 +34,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, String description, String startDate, String endDate, boolean isCompleted) {
+    public Task(String name, String description, LocalDate startDate, LocalDate endDate, boolean isCompleted) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
@@ -35,7 +42,7 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
-    public Task(String name, String description, String startDate, String endDate, boolean isCompleted, User user) {
+    public Task(String name, String description, LocalDate startDate, LocalDate endDate, boolean isCompleted, User user) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
@@ -68,19 +75,19 @@ public class Task {
         this.description = description;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

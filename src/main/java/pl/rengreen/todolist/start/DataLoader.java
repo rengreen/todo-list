@@ -13,6 +13,8 @@ import pl.rengreen.todolist.service.RoleService;
 import pl.rengreen.todolist.service.TaskService;
 import pl.rengreen.todolist.service.UserService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -21,6 +23,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private UserService userService;
     private TaskService taskService;
     private final Logger logger = LoggerFactory.getLogger(DataLoader.class);
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     @Autowired
     public void setRoleService(RoleService roleService) {
@@ -92,13 +95,16 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task = new Task();
         task.setName("First meeting");
         task.setDescription("Setup first meetings with client");
-        task.setStartDate("2019-03-01");
-        task.setEndDate("2019-03-02");
+        LocalDate startDate = LocalDate.parse("01-04-2019", formatter);
+        LocalDate endDate = LocalDate.parse("02-04-2019", formatter);
+        task.setStartDate(startDate);
+        task.setEndDate(endDate);
         task.setCompleted(true);
         task.setUser(userService.getUserByEmail("mark@mail.com"));
         taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' for user: "+task.getUser().getName());
 
+        /*
         //2
         task = new Task();
         task.setName("Briefing document");
@@ -195,6 +201,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         task.setCompleted(false);
         taskService.createTask(task);
         logger.info("saved task: '" + task.getName()+"' with no user");
+
+        */
     }
 }
 
