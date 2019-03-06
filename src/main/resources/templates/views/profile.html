@@ -40,12 +40,8 @@
                     <td th:text="${t.name}"></td>
                     <td th:text="${t.description}"></td>
 
-                    <td th:text="${#strings.substring(t.startDate+' ',8,10)}
-                            +'-'+${#strings.substring(t.startDate,5,7)}
-                            +'-'+${#strings.substring(t.startDate,0,4)}"></td>
-                    <td th:text="${#strings.substring(t.endDate+' ',8,10)}
-                            +'-'+${#strings.substring(t.endDate,5,7)}
-                            +'-'+${#strings.substring(t.endDate,0,4)}"></td>
+                    <td th:text="${#temporals.format(t.startDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${#temporals.format(t.endDate, 'dd-MM-yyyy')}"></td>
 
                     <td th:id="row+${t.id}">
                         <a th:href="${t.completed} ? ${'/task/markUndone/' + t.id} : ${'/task/markDone/' + t.id}"

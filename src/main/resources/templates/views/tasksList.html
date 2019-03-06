@@ -47,12 +47,8 @@
                            class="btn btn-outline-info btn-sm">Show</a>
                     </td>
 
-                    <td th:text="${#strings.substring(t.startDate+' ',8,10)}
-                            +'-'+${#strings.substring(t.startDate,5,7)}
-                            +'-'+${#strings.substring(t.startDate,0,4)}"></td>
-                    <td th:text="${#strings.substring(t.endDate+' ',8,10)}
-                            +'-'+${#strings.substring(t.endDate,5,7)}
-                            +'-'+${#strings.substring(t.endDate,0,4)}"></td>
+                    <td th:text="${#temporals.format(t.startDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${#temporals.format(t.endDate, 'dd-MM-yyyy')}"></td>
 
                     <td th:if="${t.user!=null}">
                         <div th:text="${t.user.getName()}"></div>
