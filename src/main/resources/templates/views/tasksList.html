@@ -110,7 +110,22 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p th:text="${'Are you sure you want to delete task: &quot '+t.name+'&quot?'}"></p>
+
+                                    <p th:text="${'You are going to delete task: &quot '+t.name+'&quot.'}"></p>
+
+                                    <div th:if="${t.user==null}">
+                                        <p th:text="${t.completed} ?'This task is completed.' :'This task is not completed.'"></p>
+                                    </div>
+
+                                    <div th:unless="${t.user==null}">
+                                        <p th:text="${t.completed} ?
+                                        ${t.user.getName()}+' has completed this task.' :
+                                        ${t.user.getName()}+' is working on this task.'"></p>
+                                        <p th:text="'Please inform '+${t.user.getName()}+ ' about task deletion.' "></p>
+                                    </div>
+                                    
+                                    <hr>
+                                    <h5>Are you sure you want to delete this task?</h5>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
