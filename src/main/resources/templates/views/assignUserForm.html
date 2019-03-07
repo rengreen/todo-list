@@ -82,18 +82,8 @@
     <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </footer>
 
-<script>
-    $(function() {
-        var count = 0;
-        $('ul').each(function(){
-            if(count !== 0){
-                var len = $(this).find('li').length;
-                $(this).parent().find('.my-replace-by-number').html(len);
-            }
-            count++;
-        })
-    });
-</script>
+<!--replacing list of items by number (list length)-->
+<script src="js/main.js"></script>
 
 </body>
 </html>
