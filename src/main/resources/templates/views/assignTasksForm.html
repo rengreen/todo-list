@@ -45,12 +45,8 @@
 
                                 <td th:text="${ut.name}"></td>
 
-                                <td th:text="${#strings.substring(ut.startDate+' ',8,10)}
-                            +'-'+${#strings.substring(ut.startDate,5,7)}
-                            +'-'+${#strings.substring(ut.startDate,0,4)}"></td>
-                                <td th:text="${#strings.substring(ut.endDate+' ',8,10)}
-                            +'-'+${#strings.substring(ut.endDate,5,7)}
-                            +'-'+${#strings.substring(ut.endDate,0,4)}"></td>
+                                <td th:text="${#temporals.format(ut.startDate, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#temporals.format(ut.endDate, 'dd-MM-yyyy')}"></td>
 
                                 <td th:text="${ut.completed} ? 'completed' : 'in progress'"></td>
                             </tr>
@@ -78,12 +74,8 @@
                             <tr th:each="ft:${freeTasks}" th:unless="${freeTasks.size()==0}">
                                 <td th:text="${ft.name}"></td>
 
-                                <td th:text="${#strings.substring(ft.startDate+' ',8,10)}
-                            +'-'+${#strings.substring(ft.startDate,5,7)}
-                            +'-'+${#strings.substring(ft.startDate,0,4)}"></td>
-                                <td th:text="${#strings.substring(ft.endDate+' ',8,10)}
-                            +'-'+${#strings.substring(ft.endDate,5,7)}
-                            +'-'+${#strings.substring(ft.endDate,0,4)}"></td>
+                                <td th:text="${#temporals.format(ft.startDate, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#temporals.format(ft.endDate, 'dd-MM-yyyy')}"></td>
 
                                 <td><a th:href="@{'/user/assign/'+${user.email}+'/'+ ${ft.id}}"
                                        class="btn btn-info btn-sm">Assign this task</a>
