@@ -49,7 +49,10 @@
                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div >
                     <input type="date" class="form-control"
+                           th:attr="value=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')},
+                                    min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
                            th:field="*{startDate}" id="startDate"/>
+
                     </div>
                     <div class="text text-danger"
                          th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
@@ -62,6 +65,8 @@
                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div >
                     <input type="date" class="form-control"
+                           th:attr="value=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')},
+                                    min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
                            th:field="*{endDate}" id="endDate"/>
                     </div>
                     <div class="text text-danger"
