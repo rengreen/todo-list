@@ -19,3 +19,9 @@ main.container {
 .form-control:focus {
   box-shadow: none;
 }
+
+.my-logo {
+  font-family: 'Changa', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1rem;
+}
