@@ -1,8 +1,9 @@
-# TODO List  
+# Task manager  
 
-Simple Todo App according to https://github.com/1024kb-pl/StowarzyszenieNaukiJavy/wiki/Simple-Todo-App  
+First version of task manager  
+See improved version https://github.com/rengreen/task-manager
   
-**Functional requirements:**
+## Functional requirements:
 - User login and registration
 - Create task (task name, task description, date of completion, status - completed or not)
 - Assign task to user 
@@ -11,8 +12,20 @@ Simple Todo App according to https://github.com/1024kb-pl/StowarzyszenieNaukiJav
 - Mark task as completed
 - Display all tasks
 
-**Started with Spring Initializr** https://start.spring.io/
-including: Web, Security, JPA, H2, MySQL, Thymeleaf, DevTools.  
+## Built With
+* Spring Boot
+* Spring Security
+* H2 database
+* Maven 
+* Thymeleaf
+* Bootstrap
+* jQuery
+  
+  
+## Inspiration
+https://github.com/sambaf/NHSystem  
+https://github.com/springframeworkguru/springbootwebapp  
+https://github.com/gustavoponce7/spring-login
   
 ---  
 Commit emojis thanks to: https://gitmoji.carloscuesta.me/  
